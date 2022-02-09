@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Services\ArticleInterface;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    public function __construct(private ArticleInterface $service)
+    {
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +28,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.form');
     }
 
     /**
@@ -33,9 +37,9 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        return $this->service->store();
     }
 
     /**

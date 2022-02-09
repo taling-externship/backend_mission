@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
+use App\Services\ArticleInterface;
+use App\Services\ArticleService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        app()->bind(ArticleInterface::class, function () {
+            return new ArticleService(new Article());
+        });
     }
 
     /**
