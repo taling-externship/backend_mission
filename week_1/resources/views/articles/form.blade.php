@@ -9,23 +9,24 @@
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">title</label>
-            <input id="title" class="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="title" value="{{ old('title') }}">
+            <x-forms.input id="title" type="text" name="title" />
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="body">body</label>
-            <textarea id="body" class="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
-                focus:outline-none focus:shadow-outline" type="text" name="body">{{ old('body') }}</textarea>
+            <x-forms.textarea id="body" name="body" />
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="tags">tags</label>
-            <input id="tags" class="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="tags[]">
-            <input class="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="tags[]">
-            <input class="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="tags[]">
+            <div class="flex gap-2">
+                <x-forms.input id="tags" type="text" name="tags[]" />
+                <x-forms.input id="tags" type="text" name="tags[]" />
+                <x-forms.input id="tags" type="text" name="tags[]" />
+            </div>
         </div>
 
-        <input type="submit" value="submit" class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+        <x-forms.button type="submit" name="submit" color="blue" />
     </form>
 </main>
 @endsection
