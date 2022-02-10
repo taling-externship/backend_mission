@@ -18,7 +18,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return $this->service->getList();
     }
 
     /**
@@ -50,7 +50,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return $this->service->getOne($article);
     }
 
     /**

@@ -1,8 +1,7 @@
 module.exports = {
     content: [
         "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
     ],
     presets: [],
     darkMode: "media", // or 'class'
@@ -972,9 +971,5 @@ module.exports = {
         "active",
         "disabled",
     ],
-    plugins: [
-        require("@tailwindcss/forms")({
-            strategy: "class",
-        }),
-    ],
+    plugins: [],
 };

@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-<main class="container mx-auto px-4 my-4">
     <x-header />
 
     <form action="/article" method="POST">
@@ -28,5 +27,5 @@
 
         <x-forms.button type="submit" name="submit" color="blue" />
     </form>
-</main>
+
 @endsection

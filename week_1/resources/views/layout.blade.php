@@ -10,8 +10,11 @@
 </head>
 
 <body>
-@yield('content')
+<main class="container mx-auto px-4 my-4 max-w-xl">
 
+    @yield('content')
+
+</main>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 

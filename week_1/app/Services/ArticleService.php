@@ -11,6 +11,13 @@ class ArticleService implements ArticleInterface
     {
     }
 
+    public function getList()
+    {
+        return view('articles.list', [
+            'articles' => $this->model->latest()->paginate(15),
+        ]);
+    }
+
     public function store()
     {
         $params = request()->validate([
@@ -39,5 +46,10 @@ class ArticleService implements ArticleInterface
         }
 
         return redirect('/article')->with('success', 'Your Article is created well');
+    }
+
+    public function getOne($article)
+    {
+        return view('articles.show', compact('article'));
     }
 }
