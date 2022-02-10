@@ -17,3 +17,14 @@ services:
             - --collation-server=utf8mb4_general_ci
         volumes:
             - ./docker/data:/var/lib/mysql
+
+    phpmyadmin:
+        depends_on:
+            - db_mysql
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - '20080:80'
+        environment:
+            PMA_HOST: db_mysql
+            MYSQL_ROOT_PASSWORD: password
