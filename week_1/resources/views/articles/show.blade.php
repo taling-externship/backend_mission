@@ -18,7 +18,13 @@
     </section>
 
     <section class="control mt-4 flex gap-2">
-        <x-forms.anchor href="{{ route('article.index') }}" name="back to list" color="red" />
+        <x-forms.anchor href="{{ route('article.index') }}" name="back to list" color="blue" />
         <x-forms.anchor href="{{ route('article.edit', $article->id) }}" name="edit" color="blue" />
+
+        <form action="{{ route('article.destroy', $article->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <x-forms.button type="submit" name="delete" color="red" />
+        </form>
     </section>
 @endsection

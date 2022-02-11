@@ -83,6 +83,12 @@ class ArticleService implements ArticleInterface
         return redirect()->route('article.show', $article)->with('success', 'Your Article is updated well');
     }
 
+    public function delete($article)
+    {
+        $article->delete();
+        return redirect(route('article.index'))->with('success', 'Your Article is deleted well');
+    }
+
     private function validate($request)
     {
         return $request->validate([

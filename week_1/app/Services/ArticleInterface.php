@@ -11,4 +11,5 @@ interface ArticleInterface
     public function getOne($article);
     public function editForm($article);
     public function update($article);
+    public function delete($article);
 }
