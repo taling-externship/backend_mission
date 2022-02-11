@@ -13,7 +13,7 @@
                 <span class="text-xs">{{ $article->created_at->diffForHumans() }}</span>
                 <p class="text-right mt-2">
                     @foreach ($article->tags as $tag)
-                        <span class="text-xs text-white bg-blue-400 rounded p-1">{{ $tag->name }}</span>
+                        <x-articles.tag>{{ $tag->name }}</x-articles.tag>
                     @endforeach
                 </p>
             </x-articles.item>
@@ -23,9 +23,11 @@
         </ul>
     </section>
 
+    @if( $articles )
     <section class="pagination">
         {{ $articles->links() }}
     </section>
+    @endif
 
     <section class="control my-4">
         <x-forms.anchor

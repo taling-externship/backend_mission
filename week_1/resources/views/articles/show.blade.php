@@ -11,6 +11,12 @@
         <p class="mt-4"> {{ $article->created_at }} </p>
     </section>
 
+    <section class="tags my-4 text-right">
+        @foreach ($article->tags as $tag)
+            <x-articles.tag>{{ $tag->name }}</x-articles.tag>
+        @endforeach
+    </section>
+
     <section class="control mt-4 flex gap-2">
         <x-forms.anchor href="{{ route('article.index') }}" name="back to list" color="red" />
         <x-forms.anchor href="{{ route('article.edit', $article->id) }}" name="edit" color="blue" />

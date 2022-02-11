@@ -26,7 +26,7 @@ class ArticleReadTest extends TestCase
         Article::factory(5)->create();
 
         $response = $this->get('/article');
-        $articles = Article::latest()->paginate(15);
+        $articles = Article::latest()->with('tags')->paginate(15);
 
         $response->assertStatus(200);
         $response->assertViewHas('articles', $articles);

@@ -61,7 +61,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return $this->service->editForm($article);
     }
 
     /**
@@ -71,9 +71,9 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Article $article)
     {
-        //
+        return $this->service->update($article);
     }
 
     /**
