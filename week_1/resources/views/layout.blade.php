@@ -10,6 +10,10 @@
 </head>
 
 <body>
+
+<hr class="bg-blue-400 hover:bg-blue-700 hidden" />
+<hr class="bg-red-400 hover:bg-red-700 hidden" />
+
 <main class="container mx-auto px-4 my-4 max-w-xl">
 
     @yield('content')

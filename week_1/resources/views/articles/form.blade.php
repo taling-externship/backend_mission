@@ -26,6 +26,7 @@
         </div>
 
         <x-forms.button type="submit" name="submit" color="blue" />
+        <x-forms.anchor href="{{ route('article.index') }}" name="cancel" color="red" />
     </form>
 
 @endsection
