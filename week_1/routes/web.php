@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',  [BoardController::class, 'index']);
+Route::get('/board', [BoardController::class, 'list'])->name('board');
