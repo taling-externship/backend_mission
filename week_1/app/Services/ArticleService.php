@@ -18,6 +18,13 @@ class ArticleService implements ArticleInterface
         ]);
     }
 
+    public function createForm()
+    {
+        return view('articles.form', [
+            'method' => 'POST',
+        ]);
+    }
+
     public function store()
     {
         $params = $this->validate(request());
