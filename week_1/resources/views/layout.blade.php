@@ -19,6 +19,8 @@
 
     @yield('content')
 
+    <x-flash />
+
 </main>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.3.2/dist/instant-meilisearch.umd.min.js"></script>

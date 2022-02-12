@@ -101,7 +101,7 @@ class ArticleService implements ArticleInterface
         return $request->validate([
             'title' => 'required|max:255',
             'body'  => 'max:3000',
-            'tags'  => 'array|max:50',
+            'tags.*'  => 'max:50',
         ]);
     }
 }

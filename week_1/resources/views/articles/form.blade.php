@@ -3,7 +3,8 @@
 @section('content')
     <x-header />
 
-    <form action="{{ $method === 'PATCH' ? route('article.update', $article->id) : route('article.store') }}" method="POST">
+    <form action="{{ $method === 'PATCH' ? route('article.update', $article->id) : route('article.store') }}"
+        method="POST" novalidate>
         @csrf
         @method($method === 'PATCH' ? 'PATCH' : 'POST')
 
@@ -22,11 +23,11 @@
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="tags">tags</label>
             <div class="flex gap-2">
-                <x-forms.input id="tags" type="text" name="tags[]"
+                <x-forms.input id="tags" type="text" name="tags[]" errName="tags.0"
                     value="{{ $method === 'PATCH' && isset($article->tags[0]) ? $article->tags[0]->name : null }}" />
-                <x-forms.input id="tags" type="text" name="tags[]"
+                <x-forms.input id="tags" type="text" name="tags[]" errName="tags.1"
                     value="{{ $method === 'PATCH' && isset($article->tags[1]) ? $article->tags[1]->name : null }}" />
-                <x-forms.input id="tags" type="text" name="tags[]"
+                <x-forms.input id="tags" type="text" name="tags[]" errName="tags.2"
                     value="{{ $method === 'PATCH' && isset($article->tags[2]) ? $article->tags[2]->name : null }}" />
             </div>
         </div>
