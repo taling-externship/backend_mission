@@ -16,4 +16,11 @@ class Article extends Model
     {
         return $this->belongsToMany('App\\Models\\Tag', 'articles_tags',);
     }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        $array['tags'] = $this->tags->toArray();
+        return $array;
+    }
 }
