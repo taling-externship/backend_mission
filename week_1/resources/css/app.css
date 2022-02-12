@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pagination div p {
+    display: none;
+}
+
+.pagination span[aria-current="page"] span {
+    background-color: #60a5fa;
+    color: #fff;
+    font-weight: bold;
+}
+
+#hits {
+    display: none;
+}
+
+.wrapper.search-wrapper {
+    padding: 30px 0;
+    width: 100%;
+    position: unset;
+    top: unset;
+    margin-left: unset;
+    margin-right: unset;
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper.search-wrapper {
+        padding: 30px 0;
+        width: 100%;
+        position: unset;
+        top: unset;
+        margin-left: unset;
+        margin-right: unset;
+        left: unset;
+        transform: unset;
+    }
+}
