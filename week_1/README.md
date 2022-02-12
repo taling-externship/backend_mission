@@ -6,3 +6,6 @@
 
 ### laravel-ide-helper
 https://github.com/barryvdh/laravel-ide-helper
+
+### config 
+DB 타입 : utf8mb4_general_ci 변경	
