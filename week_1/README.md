@@ -8,4 +8,5 @@
 https://github.com/barryvdh/laravel-ide-helper
 
 ### config 
-DB 타입 : utf8mb4_general_ci 변경	
+DB 타입 : utf8mb4_general_ci 변경  	
+tailwindcss 추가 : https://tailwindcss.com/docs/guides/laravel  
