@@ -1,1 +1,7 @@
-# 1주차 프로젝트를 이 곳에 넣어주세요.
+#셋팅 명령어
+1. composer install
+2. npm install
+3. cp .env.example .env
+4. php artisan key:generate
+5. php artisan storage:link
+6. php artisan migrate:fresh --seed
