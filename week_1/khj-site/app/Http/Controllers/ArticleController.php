@@ -43,6 +43,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'body' => ['required'],
+        ]);
+
         $title = $request->get('title');
         $body = $request->get('body');
 
@@ -86,6 +91,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'body' => ['required'],
+        ]);
+
         $title = $request->get('title');
         $body = $request->get('body');
 

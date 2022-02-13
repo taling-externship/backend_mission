@@ -1,9 +1,9 @@
 <div class="form-group{{ $errors->has('title') ? ' has-danger' : '' }} mb-4">
     <label for="input-title" class="form-label">제목</label>
-    <input type="text" name="title" id="input-title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="제목" value="{{ old('title', $article->title) }}" autofocus>
-    @if ($errors->has('vendor_index'))
+    <input type="text" name="title" id="input-title" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="제목" value="{{ old('title', $article->title) }}">
+    @if ($errors->has('title'))
         <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('title') }}</strong>
+            <strong>제목을 입력헤주세요.</strong>
         </span>
     @endif
 </div>
@@ -15,7 +15,7 @@
               placeholder="내용을 입력해주세요">{{ old('body', $article->body) }}</textarea>
     @if ($errors->has('body'))
     <span class="invalid-feedback" role="alert">
-        <strong>{{ $errors->first('body') }}</strong>
+        <strong>내용을 입력해주세요</strong>
     </span>
     @endif
 </div>
