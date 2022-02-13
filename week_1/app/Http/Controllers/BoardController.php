@@ -40,13 +40,13 @@ class BoardController extends Controller
         $board = Board::where("is_show", true)
             ->where("slug_id", "$slug_id")
             ->first();
-
         // boards 가 없는 경우 404 Network Tab 404 로 전환
         if (!$board) {
             abort(404);
         }
 
-        return view("boards.detail", compact("board"));
+        $next = Board::where("id", '>', $board->id)->first();
+        return view("boards.detail", compact("board", "next"));
     }
 
     /**
