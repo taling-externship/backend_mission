@@ -50,7 +50,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($boards as $board)
+                        @forelse($boards as $board)
                             <tr class="border-b">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
                                     {{ $board->id }}
@@ -76,7 +76,13 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr class="border-b">
+                                <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
+                                    비엇다
+                                </td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
