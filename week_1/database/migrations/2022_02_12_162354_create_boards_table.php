@@ -15,8 +15,9 @@ class CreateBoardsTable extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->string("title")->comment("제목");
+            $table->string("title", '120')->comment("제목");
             $table->text("body")->comment("내용");
+            $table->string("slug_id")->unique()->comment("Slug-id");
             $table->string("slug")->unique()->comment("제목-Slug");
             $table->boolean('is_show')->default(true)->comment("공개 여부");
             $table->timestamps();

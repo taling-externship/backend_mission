@@ -15,10 +15,27 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Board newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Board query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $title 제목
+ * @property string $body 내용
+ * @property string $slug_id slug_id
+ * @property string $slug 제목-Slug
+ * @property int $is_show 공개 여부
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\BoardFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereIsShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Board whereUpdatedAt($value)
  */
 class Board extends Model
 {
     use HasFactory;
+    private mixed $search;
 
     /**
      * 공개 가능한 필드 정의
@@ -29,10 +46,10 @@ class Board extends Model
         'title',
         'body',
         'slug',
+        'slug_id',
         'created_at',
         'updated_at'
     ];
-
 
     /**
      * 1:N 관계 정의
