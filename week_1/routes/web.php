@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  [BoardController::class, 'index']);
-Route::get('/board', [BoardController::class, 'list'])->name('board');
+Route::get('/',  function (){
+    return view('home');
+});
+Route::get('/boards', [BoardController::class, 'list'])->name('boards');
+
+// [View]
+Route::get('/boards/detail/{slug}', [BoardController::class, 'detail'])->name('boards.detail');
+Route::get('/boards/edit/{id}', [BoardController::class, 'edit'])->name('boards.edit');
+Route::get('/boards/create', [BoardController::class, 'create'])->name('boards.create');
+
+// [Event]
+Route::post('/boards/write', [BoardController::class, 'write'])->name('boards.write');
+Route::post('/boards/update', [BoardController::class, 'update'])->name('boards.update');
+Route::delete('/boards/delete/{id}', [BoardController::class, 'delete'])->name('boards.delete');
