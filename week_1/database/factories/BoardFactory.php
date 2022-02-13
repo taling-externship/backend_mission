@@ -14,20 +14,20 @@ class BoardFactory extends Factory
      * @return array
      */
     #[ArrayShape([
-        "title" => "string",
-        "body" => "string",
-        "slug" => "string",
-        "is_show" => "bool"]
+        'title' => 'string',
+        'body' => 'string',
+        'slug' => 'string',
+        'is_show' => 'bool']
     )]public function definition(): array
     {
         $title = $this->faker->company;
         $slug_id = mt_rand(100000000, 9999999999);
         return [
-            "title" => $this->faker->company(),
-            "body" => $this->faker->paragraph,
-            "slug_id" => $slug_id,
-            "slug" => $slug_id."-".Str::slug($title, "-"),
-            "is_show" => true,
+            'title' => $this->faker->company(),
+            'body' => $this->faker->paragraph,
+            'slug_id' => $slug_id,
+            'slug' => $slug_id.'-'.Str::slug($title, '-'),
+            'is_show' => true,
         ];
     }
 }
