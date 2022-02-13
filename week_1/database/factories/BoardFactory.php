@@ -20,10 +20,10 @@ class BoardFactory extends Factory
         "is_show" => "bool"]
     )]public function definition(): array
     {
-        $title = $this->faker->name();
+        $title = $this->faker->company;
         $slug_id = mt_rand(100000000, 9999999999);
         return [
-            "title" => $this->faker->name(),
+            "title" => $this->faker->company(),
             "body" => $this->faker->paragraph,
             "slug_id" => $slug_id,
             "slug" => $slug_id."-".Str::slug($title, "-"),
