@@ -11,10 +11,13 @@
                 </div>
                 <div class="font-semibold">
                     <a href="{{ route('boards') }}" class="text-blue-600 mr-2">목록으로</a>
-                    <a href="" class="text-gray-400">다음 글</a>
+                    @if($next)
+                        <a href="{{ route('boards.detail', ['slug' => $next->slug ]) }}">
+                            다음 글
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
 @stop
