@@ -12,11 +12,15 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::orderBy('id', 'desc')->get();
+        $keyword = $request->get('keyword');
 
-        return view('articles.index', compact('articles'));
+        $articles = Article::where('title', 'like', '%' . $keyword . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(12);
+
+        return view('articles.index', ['articles' => $articles, 'keyword' => $keyword]);
     }
 
     /**

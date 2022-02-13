@@ -3,10 +3,23 @@
 @section('title', '게시글')
 
 @section('content')
-<div class="t-bg-zinc-300 t-h-[300px]">
-
+<div class="t-bg-zinc-300">
+    <div class="container">
+        <div class="row py-lg-5">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <form action="{{ route('articles.index') }}">
+                    <div class="search">
+                        <input type="text" class="search-input" name="keyword"
+                               placeholder="제목으로 검색"
+                               value="{{ $keyword }}">
+                        <a href="#" class="search-icon"> <i class="fa fa-search"></i> </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="pt-2 pb-3 bg-light t-min-h-[800px]">
+<div class="py-4 bg-light t-min-h-[800px]">
     <div class="container">
         <div class="g-3">
             <a class="btn btn-sm btn-primary mb-3" href="{{ route('articles.create') }}">
@@ -14,22 +27,24 @@
                 게시글 작성
             </a>
         </div>
-        <div class="col-12">
-            @if (Session::has('status'))
-                <div class="alert alert-{{ Session::get('status')[0]}} alert-dismissible fade show d-flex t-justify-between" role="alert">
-                    {{ Session::get('status')[1] }}
-                    <div class="text-end">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <div class="row">
+            <div class="col-12">
+                @if (Session::has('status'))
+                    <div class="alert alert-{{ Session::get('status')[0]}} alert-dismissible fade show d-flex t-justify-between" role="alert">
+                        {{ Session::get('status')[1] }}
+                        <div class="text-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 mb-5 row-cols-sm-2 row-cols-md-3 g-3">
             @foreach($articles as $article)
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm t-min-h-[150px]">
                         <div class="card-body" >
                             <div class="t-text-xs text-muted">No. {{ $article->id }}</div>
                             <div class="card-text" ><a href="{{ route('articles.show', $article) }}">{{ Str::limit($article->title, 35, $end=' ...') }}</a></div>
@@ -41,6 +56,10 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        <div class="d-flex justify-content-end">
+            {{ $articles->links() }}
         </div>
     </div>
 </div>
