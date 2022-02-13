@@ -29,6 +29,13 @@
                         <span class="t-hidden sm:t-block t-pt-1">홈</span>
                     </a>
                 </li>
+                <li class="{{ Str::startsWith(Route::currentRouteName(), 'articles.') ? 't-text-[#ff4545]' : '' }}">
+                    <a href="{{ route('articles.index') }}" class="t-h-full t-flex t-items-center px-2">
+                        <i class="fa fa-align-justify"></i>
+                        <span class="t-hidden sm:t-block">&nbsp;</span>
+                        <span class="t-hidden sm:t-block t-pt-1">게시물</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
