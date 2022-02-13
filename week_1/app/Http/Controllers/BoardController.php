@@ -50,6 +50,15 @@ class BoardController extends Controller
     }
 
     /**
+     * [View]: 작성 페이지
+     * @return Application|Factory|View
+     */
+    public function create(): Application|Factory|View
+    {
+        return view('boards.create');
+    }
+
+    /**
      * [View]: 편집 페이지
      * @param Request $request
      * @return Application|Factory|View
@@ -66,24 +75,14 @@ class BoardController extends Controller
     }
 
     /**
-     * [View]: 작성 페이지
-     * @return Application|Factory|View
-     */
-    public function create(): Application|Factory|View
-    {
-        return view('boards.create');
-    }
-
-    /**
-     * [Event]: 수정
-     * @param BoardUpdateRequest $request
+     * [Event]: 작성
+     * @param BoardWriteRequest $request
      * @return RedirectResponse
      */
-    public function update(BoardUpdateRequest $request): RedirectResponse
+    public function write(BoardWriteRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-
-        $result = Board::where('id', $validated['id'])->update([
+        $result = Board::create([
             'title' => Str::of($validated['title'])->trim(),
             'body' => Str::of($validated['body'])->trim(),
             'slug_id' => $validated['slug_id'],
@@ -97,14 +96,15 @@ class BoardController extends Controller
     }
 
     /**
-     * [Event]: 작성
-     * @param BoardWriteRequest $request
+     * [Event]: 수정
+     * @param BoardUpdateRequest $request
      * @return RedirectResponse
      */
-    public function write(BoardWriteRequest $request): RedirectResponse
+    public function update(BoardUpdateRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        $result = Board::create([
+
+        $result = Board::where('id', $validated['id'])->update([
             'title' => Str::of($validated['title'])->trim(),
             'body' => Str::of($validated['body'])->trim(),
             'slug_id' => $validated['slug_id'],

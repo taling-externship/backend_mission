@@ -14,11 +14,11 @@ class BoardFactory extends Factory
      * @return array
      */
     #[ArrayShape([
-        'title' => 'string',
-        'body' => 'string',
-        'slug' => 'string',
-        'is_show' => 'bool']
-    )]public function definition(): array
+            'title' => 'string',
+            'body' => 'string',
+            'slug' => 'string',
+            'is_show' => 'bool']
+    )] public function definition(): array
     {
         $title = $this->faker->company;
         $slug_id = mt_rand(100000000, 9999999999);
@@ -26,7 +26,7 @@ class BoardFactory extends Factory
             'title' => $this->faker->company(),
             'body' => $this->faker->paragraph,
             'slug_id' => $slug_id,
-            'slug' => $slug_id.'-'.Str::slug($title, '-'),
+            'slug' => $slug_id . '-' . Str::slug($title, '-'),
             'is_show' => true,
         ];
     }
