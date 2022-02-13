@@ -25,32 +25,32 @@ class BoardUpdateRequest extends FormRequest
      * @return array
      */
     #[ArrayShape([
-        "id" => "string",
-        "title" => "string",
-        "body" => "string",
-        "slug_id" => "string",
-        "slug" => "string"
+        'id' => 'string',
+        'title' => 'string',
+        'body' => 'string',
+        'slug_id' => 'string',
+        'slug' => 'string'
     ])] public function rules(): array
     {
         return [
-            "id" => "required|int",
-            "title" => "required|max:120",
-            "body" => "required|min:12",
-            "slug_id" => "required",
-            "slug" => "required"
+            'id' => 'required|int',
+            'title' => 'required|max:120',
+            'body' => 'required|min:12',
+            'slug_id' => 'required',
+            'slug' => 'required'
         ];
     }
 
     #[ArrayShape([
-        "*.required" => "string",
-        "title.max" => "string",
-        "body.min" => "string"
+        '*.required' => 'string',
+        'title.max' => 'string',
+        'body.min' => 'string'
     ])] public function messages(): array
     {
         return [
-            "*.required" => ":attribute 를 작성해주세요.",
-            "title.max" => "게시글 제목은 최대 120자입니다.",
-            "body.min" => "게시글 내용은 최소 12자입니다.",
+            '*.required' => ':attribute 를 작성해주세요.',
+            'title.max' => '게시글 제목은 최대 120자입니다.',
+            'body.min' => '게시글 내용은 최소 12자입니다.',
         ];
     }
 
@@ -63,8 +63,8 @@ class BoardUpdateRequest extends FormRequest
         $board = Board::find($this['id']);
         $slug_title = Str::slug(Str::of($this['title'])->trim(), '-');
         $this->merge([
-            "slug_id" => $board->slug_id,
-            "slug" => $board->slug_id. "-". $slug_title,
+            'slug_id' => $board->slug_id,
+            'slug' => $board->slug_id. '-'. $slug_title,
         ]);
     }
 }

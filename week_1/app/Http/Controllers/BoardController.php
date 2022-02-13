@@ -23,10 +23,10 @@ class BoardController extends Controller
         $boards = Board::where('is_show', true);
         if (isset($search['search'])) {
             $keyword = Str::of($search['search'])->trim();
-            $boards = $boards->where("title", "LIKE", "%$keyword%");
+            $boards = $boards->where('title', 'LIKE', "%$keyword%");
         }
         $boards = $boards->paginate(15);
-        return view("boards.list", compact("boards"));
+        return view('boards.list', compact('boards'));
     }
 
     /**
@@ -36,17 +36,17 @@ class BoardController extends Controller
      */
     public function detail(Request $request): Application|Factory|View
     {
-        $slug_id = explode("-", $request->slug)[0];
-        $board = Board::where("is_show", true)
-            ->where("slug_id", "$slug_id")
+        $slug_id = explode('-', $request->slug)[0];
+        $board = Board::where('is_show', true)
+            ->where('slug_id', '$slug_id')
             ->first();
         // boards 가 없는 경우 404 Network Tab 404 로 전환
         if (!$board) {
             abort(404);
         }
 
-        $next = Board::where("id", '>', $board->id)->first();
-        return view("boards.detail", compact("board", "next"));
+        $next = Board::where('id', '>', $board->id)->first();
+        return view('boards.detail', compact('board', 'next'));
     }
 
     /**
@@ -62,7 +62,7 @@ class BoardController extends Controller
             abort(404);
         }
 
-        return view("boards.edit", compact("board"));
+        return view('boards.edit', compact('board'));
     }
 
     /**
@@ -71,7 +71,7 @@ class BoardController extends Controller
      */
     public function create(): Application|Factory|View
     {
-        return view("boards.create");
+        return view('boards.create');
     }
 
     /**
@@ -83,17 +83,17 @@ class BoardController extends Controller
     {
         $validated = $request->validated();
 
-        $result = Board::where("id", $validated["id"])->update([
-            "title" => Str::of($validated["title"])->trim(),
-            "body" => Str::of($validated["body"])->trim(),
-            "slug_id" => $validated["slug_id"],
-            "slug" => $validated["slug"],
+        $result = Board::where('id', $validated['id'])->update([
+            'title' => Str::of($validated['title'])->trim(),
+            'body' => Str::of($validated['body'])->trim(),
+            'slug_id' => $validated['slug_id'],
+            'slug' => $validated['slug'],
         ]);
 
         if (!$result) {
             abort(500);
         }
-        return redirect()->route("boards");
+        return redirect()->route('boards');
     }
 
     /**
@@ -105,16 +105,16 @@ class BoardController extends Controller
     {
         $validated = $request->validated();
         $result = Board::create([
-            "title" => Str::of($validated["title"])->trim(),
-            "body" => Str::of($validated["body"])->trim(),
-            "slug_id" => $validated["slug_id"],
-            "slug" => $validated["slug"],
+            'title' => Str::of($validated['title'])->trim(),
+            'body' => Str::of($validated['body'])->trim(),
+            'slug_id' => $validated['slug_id'],
+            'slug' => $validated['slug'],
         ]);
 
         if (!$result) {
             abort(500);
         }
-        return redirect()->route("boards");
+        return redirect()->route('boards');
     }
 
     /**
@@ -124,7 +124,7 @@ class BoardController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        Board::where("id", $id)->delete();
-        return redirect()->route("boards");
+        Board::where('id', $id)->delete();
+        return redirect()->route('boards');
     }
 }
