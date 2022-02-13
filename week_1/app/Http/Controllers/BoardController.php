@@ -51,12 +51,12 @@ class BoardController extends Controller
 
     /**
      * [View]: 편집 페이지
-     * @param Board $board
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function edit(Board $board): Application|Factory|View
+    public function edit(Request $request): Application|Factory|View
     {
-        $board = Board::find($board->id);
+        $board = Board::find($request->id);
         // boards 가 없는 경우 404 Network Tab 404 로 전환
         if (!$board) {
             abort(404);
