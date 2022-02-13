@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Board;
 
+use App\Models\Board;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
 
 class BoardUpdateRequest extends FormRequest
@@ -35,7 +37,7 @@ class BoardUpdateRequest extends FormRequest
             "title" => "required|max:120",
             "body" => "required|min:12",
             "slug_id" => "required",
-            "slug" => "request"
+            "slug" => "required"
         ];
     }
 
@@ -58,10 +60,11 @@ class BoardUpdateRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        $board = Board::find($this['id']);
         $slug_title = Str::slug(Str::of($this['title'])->trim(), '-');
         $this->merge([
-            "slug_id" => $this['slug_id'],
-            "slug" => $this['slug_id']. "-". $slug_title,
+            "slug_id" => $board->slug_id,
+            "slug" => $board->slug_id. "-". $slug_title,
         ]);
     }
 }
