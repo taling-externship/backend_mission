@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Board\BoardUpdateRequest;
+use App\Http\Requests\Board\BoardWriteRequest;
 use App\Models\Board;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -74,17 +76,18 @@ class BoardController extends Controller
 
     /**
      * [Event]: 수정
-     * @param Request $request
+     * @param BoardUpdateRequest $request
      * @return RedirectResponse
      */
-    public function update(Request $request): RedirectResponse
+    public function update(BoardUpdateRequest $request): RedirectResponse
     {
-        $board = Board::find($request->id);
-        $result = Board::where("id", $request->id)->update([
-            "title" => Str::of($request->title)->trim(),
-            "body" => Str::of($request->body)->trim(),
-            "slug_id" => $board->slug_id,
-            "slug" => $board->slug_id."-".Str::slug(Str::of($request->title)->trim(), "-"),
+        $validated = $request->validated();
+
+        $result = Board::where("id", $validated["id"])->update([
+            "title" => Str::of($validated["title"])->trim(),
+            "body" => Str::of($validated["body"])->trim(),
+            "slug_id" => $validated["slug_id"],
+            "slug" => $validated["slug"],
         ]);
 
         if (!$result) {
@@ -95,17 +98,17 @@ class BoardController extends Controller
 
     /**
      * [Event]: 작성
-     * @param Request $request
+     * @param BoardWriteRequest $request
      * @return RedirectResponse
      */
-    public function write(Request $request): RedirectResponse
+    public function write(BoardWriteRequest $request): RedirectResponse
     {
-        $slug_id = mt_rand(100000000, 9999999999);
+        $validated = $request->validated();
         $result = Board::create([
-            "title" => Str::of($request->title)->trim(),
-            "body" => Str::of($request->body)->trim(),
-            "slug_id" => $slug_id,
-            "slug" => $slug_id."-".Str::slug(Str::of($request->title)->trim(), "-"),
+            "title" => Str::of($validated["title"])->trim(),
+            "body" => Str::of($validated["body"])->trim(),
+            "slug_id" => $validated["slug_id"],
+            "slug" => $validated["slug"],
         ]);
 
         if (!$result) {
