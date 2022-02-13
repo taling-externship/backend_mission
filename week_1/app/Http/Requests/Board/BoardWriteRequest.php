@@ -52,7 +52,7 @@ class BoardWriteRequest extends FormRequest
         $slug_title = Str::slug(Str::of($this['title'])->trim(), '-');
         $this->merge([
             'slug_id' => $new_slug_id,
-            'slug' => $new_slug_id. '-'. $slug_title,
+            'slug' => $new_slug_id . '-' . $slug_title,
         ]);
     }
 
