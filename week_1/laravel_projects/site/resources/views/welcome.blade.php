@@ -7,5 +7,10 @@
 </head>
 <body>
     <div class="t-w-[10px] t-h-[10px] t-bg-[red]"></div>
+    <button class="btn btn-primary">버튼</button>
+
+    <div class="t-container">
+        Lorem ipsum dolor
+    </div>
 </body>
 </html>
