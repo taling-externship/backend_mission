@@ -6,7 +6,7 @@
 -   docker windows
 -   docker ubuntu 20
 -   composer 2
--   mvn - node 14 lts
+-   nvm - node 14 lts
 -   mysql 8
 
 ## tailwind 설치
