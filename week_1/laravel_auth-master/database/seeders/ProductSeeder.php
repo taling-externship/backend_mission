@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 ])
             )->each(function ($product) {
                 foreach (range(0, rand(1, 5)) as $i) {
-                    $sizeIndex = rand(1, 2);
+                    $sizeIndex = rand(0, 2);
                     ProductReal::factory()->create([
                         'product_id' => $product->id,
                         'option_1_name' => $this->option1Name[$sizeIndex],
