@@ -131,6 +131,13 @@ class AdminSeeder extends Seeder
                 'icon' => 'fa-users',
                 'uri' => 'users',
             ],
+            [
+                'parent_id' => 0,
+                'order' => 4,
+                'title' => 'Articles',
+                'icon' => 'fa-newspaper-o',
+                'uri' => 'articles',
+            ],
         ]);
 
         // add role to menu.
