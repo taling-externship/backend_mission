@@ -17,14 +17,6 @@ class IndexRequest
     private $keyword;
 
     /**
-     * @return string|null
-     */
-    public function getKeyword(): ?string
-    {
-        return $this->keyword;
-    }
-
-    /**
      * @param string|null $category
      * @param string|null $keyword
      */
@@ -42,4 +34,11 @@ class IndexRequest
         return $this->category;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getKeyword(): ?string
+    {
+        return $this->keyword;
+    }
 }
