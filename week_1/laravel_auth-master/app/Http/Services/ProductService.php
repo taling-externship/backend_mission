@@ -22,11 +22,10 @@ class ProductService
         }
 
         if ($request->getKeyword()) {
-            $query = $query->with('market')
-                ->where('display_name', 'like', '%'.$request->getKeyword().'%');
+            $query = $query->where('display_name', 'like', '%'.$request->getKeyword().'%');
         }
 
-        return $query->latest()->paginate(8);
+        return $query->with('market')->latest()->paginate(8);
     }
 
     public function store(StoreRequest $request)

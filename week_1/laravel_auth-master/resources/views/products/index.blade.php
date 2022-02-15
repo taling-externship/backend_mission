@@ -87,7 +87,7 @@
                        href="{{ route('products.show', $product->serial_number) }}">
                         <span>{!! $product->colors !!}</span>
                     </a>
-                    </li>
+                </li>
                 @endforeach
             </ul>
 

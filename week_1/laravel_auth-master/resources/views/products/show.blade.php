@@ -129,5 +129,4 @@
             </a>
         </div>
     </section>
-{{--    {%endblock%}--}}
 @endsection
