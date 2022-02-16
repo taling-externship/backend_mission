@@ -68,6 +68,9 @@ class ArticleService implements ArticleInterface
 
     public function editForm($article)
     {
+        if (Gate::denies('update', $article)) {
+            return abort(403, 'You are not permitted');
+        }
         return view('articles.form', [
             'article' => $article,
             'method' => 'PATCH',
