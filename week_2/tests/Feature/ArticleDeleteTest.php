@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Models\Article;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleDeleteTest extends TestCase
 {
@@ -17,7 +19,10 @@ class ArticleDeleteTest extends TestCase
      */
     public function test_delete()
     {
-        Article::factory(3)->create();
+        $user = User::factory()->create();
+        Auth::login($user);
+
+        Article::factory(3, ['user_id' => Auth::id()])->create();
 
         $deleteCandidate = Article::find(2);
 

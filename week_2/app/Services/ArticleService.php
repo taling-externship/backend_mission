@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Tag;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class ArticleService implements ArticleInterface
@@ -40,6 +41,7 @@ class ArticleService implements ArticleInterface
         $article = $this->model->create([
             'title' => $params['title'],
             'body' => $params['body'],
+            'user_id' => Auth::id(),
         ]);
 
         if (isset($params['tags'])) {

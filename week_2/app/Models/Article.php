@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,5 +23,10 @@ class Article extends Model
         $array = $this->toArray();
         $array['tags'] = $this->tags->toArray();
         return $array;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

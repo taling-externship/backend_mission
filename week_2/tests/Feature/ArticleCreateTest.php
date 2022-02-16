@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -20,6 +22,9 @@ class ArticleCreateTest extends TestCase
             'title' => 'test',
         ]);
 
+        $user = User::factory()->create();
+        Auth::login($user);
+
         $response = $this->post('/article', [
             'title' => 'test',
             'body' => 'hello',
@@ -35,6 +40,9 @@ class ArticleCreateTest extends TestCase
 
     public function test_fail_store_without_required()
     {
+        $user = User::factory()->create();
+        Auth::login($user);
+
         $response = $this->post('/article', [
             'title' => null,
             'body' => 'blind'
@@ -52,6 +60,9 @@ class ArticleCreateTest extends TestCase
 
     public function test_success_store_with_tag()
     {
+        $user = User::factory()->create();
+        Auth::login($user);
+
         $this->assertDatabaseMissing('tags', [
             'name' => 'test',
         ]);

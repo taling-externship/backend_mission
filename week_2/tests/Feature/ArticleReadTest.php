@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,6 +24,7 @@ class ArticleReadTest extends TestCase
 
     public function test_can_see_all_articles()
     {
+        User::factory()->create();
         Article::factory(5)->create();
 
         $response = $this->get('/article');
@@ -36,7 +38,8 @@ class ArticleReadTest extends TestCase
     {
         Article::create([
             'title' => $this->faker->sentence(),
-            'body' => $this->faker->paragraph()
+            'body' => $this->faker->paragraph(),
+            'user_id' => User::factory()->create()->id,
         ]);
 
         $response = $this->get('/article/1');

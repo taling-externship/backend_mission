@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\Article;
 use Exception;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleUpdateTest extends TestCase
 {
@@ -18,7 +20,10 @@ class ArticleUpdateTest extends TestCase
      */
     public function test_edit()
     {
-        $article = Article::factory(1)->create();
+        $user = User::factory()->create();
+        $article = Article::factory(1, ['user_id' => $user->id])->create();
+
+        Auth::loginUsingId($user->id);
 
         $response = $this->get('/article/1/edit');
 
@@ -32,11 +37,13 @@ class ArticleUpdateTest extends TestCase
         $prev = Article::create([
             'title' => 'before',
             'body' => 'before',
+            'user_id' => User::factory()->create()->id,
         ]);
 
         $response = $this->patch("/article/{$prev->id}", [
             'title' => 'after',
             'body' => 'after',
+            'user_id' => User::factory()->create()->id,
         ]);
 
         $after = Article::find($prev->id);
