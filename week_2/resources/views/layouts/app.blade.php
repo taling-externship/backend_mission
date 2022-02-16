@@ -18,6 +18,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
+        <input type="hidden" aria-value="meaning less" class="bg-red-400">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
