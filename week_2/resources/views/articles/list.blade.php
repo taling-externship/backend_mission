@@ -1,8 +1,4 @@
-@extends('layout')
-
-@section('content')
-    <x-header />
-
+<x-app-layout>
     <section class="my-4">
         <ul>
         @forelse ($articles as $article)
@@ -36,4 +32,4 @@
             name="make new" />
     </section>
 
-@endsection
+</x-app-layout>
