@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Tag;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Bezhanov\Faker\ProviderCollectionHelper;
 
@@ -18,6 +19,7 @@ class TagSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('en_US');
         ProviderCollectionHelper::addAllProvidersTo($faker);
+        User::factory(25)->create();
 
         $articles = Article::factory(50)->create();
 

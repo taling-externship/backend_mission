@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ArticleFactory extends Factory
@@ -19,6 +20,7 @@ class ArticleFactory extends Factory
         return [
             'title' => preg_replace("/(^[A-Z][^\s]+\s|\"|\'|\.)/", "", $faker->realText(rand(11, 40), rand(1, 5))),
             'body' => preg_replace("/(^[A-Z][^\s]+\s|\"|\'|\.)/", "", $faker->realText(rand(11, 200), rand(1, 5))),
+            'user_id' => User::all()->random()->id,
         ];
     }
 }
