@@ -26,10 +26,12 @@
     @endif
 
     <section class="control my-4">
+        @can('create', 'App\\Models\\Article')
         <x-forms.anchor
-            href="{{ route('article.create') }}"
-            color="blue"
-            name="make new" />
+        href="{{ route('article.create') }}"
+        color="blue"
+        name="make new" />
+        @endcan
     </section>
 
 </x-app-layout>

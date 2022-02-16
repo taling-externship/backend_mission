@@ -61,6 +61,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $this->authorize('manage');
         return $this->service->editForm($article);
     }
 

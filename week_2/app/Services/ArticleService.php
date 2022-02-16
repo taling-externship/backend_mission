@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Tag;
 use App\Models\Article;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleService implements ArticleInterface
 {
@@ -20,6 +21,9 @@ class ArticleService implements ArticleInterface
 
     public function createForm()
     {
+        if (Gate::denies('create', Article::class)) {
+            return redirect('/login');
+        }
         return view('articles.form', [
             'method' => 'POST',
         ]);
@@ -27,6 +31,10 @@ class ArticleService implements ArticleInterface
 
     public function store()
     {
+        if (Gate::denies('create', Article::class)) {
+            return abort(401, 'You need to login');
+        }
+
         $params = $this->validate(request());
 
         $article = $this->model->create([
