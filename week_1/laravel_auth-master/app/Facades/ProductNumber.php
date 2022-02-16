@@ -2,7 +2,7 @@
 
 namespace App\Facades;
 
-use App\Models\ProductNumberGenerator;
+use App\Models\NumberGenerator\ProductNumberGenerator;
 use Illuminate\Support\Facades\Facade;
 
 class ProductNumber extends Facade

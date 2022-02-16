@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\NotifyMessage;
+
+use function notify;
 
 class IzitoastNotifyMessage implements NotifyMessage
 {

@@ -11,7 +11,7 @@ use App\Requests\Product\IndexRequest as IndexDto;
 use App\Requests\Product\StoreRequest as StoreDto;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     protected $service;
 

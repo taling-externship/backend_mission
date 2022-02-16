@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resource('products', ProductsController::class);
+Route::resource('products', ProductController::class);
 
 Auth::routes();

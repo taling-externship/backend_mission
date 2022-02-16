@@ -2,7 +2,7 @@
 
 namespace App\Facades;
 
-use App\Models\DataTransferObjectMapper;
+use App\Models\DataTransferObjectMapper\DataTransferObjectMapper;
 use Illuminate\Support\Facades\Facade;
 
 class DataTransferObject extends Facade

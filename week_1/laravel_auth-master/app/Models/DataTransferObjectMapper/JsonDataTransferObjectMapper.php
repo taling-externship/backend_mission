@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\DataTransferObjectMapper;
 
-use App\Requests\Product\IndexRequest;
 use JsonMapper;
 use JsonMapper_Exception;
-use ReflectionException;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use ReflectionClass;
+use ReflectionException;
 use RuntimeException;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 
 class JsonDataTransferObjectMapper implements DataTransferObjectMapper

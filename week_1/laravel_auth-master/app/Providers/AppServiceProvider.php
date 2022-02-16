@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\DataTransferObjectMapper;
-use App\Models\IzitoastNotifyMessage;
-use App\Models\JsonDataTransferObjectMapper;
-use App\Models\NotifyMessage;
-use App\Models\ProductNumberGenerator;
-use App\Models\RandomProductNumberGenerator;
-use Illuminate\Support\ServiceProvider;
+use App\Models\DataTransferObjectMapper\DataTransferObjectMapper;
+use App\Models\DataTransferObjectMapper\JsonDataTransferObjectMapper;
+use App\Models\NotifyMessage\IzitoastNotifyMessage;
+use App\Models\NotifyMessage\NotifyMessage;
+use App\Models\NumberGenerator\ProductNumberGenerator;
+use App\Models\NumberGenerator\RandomProductNumberGenerator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
