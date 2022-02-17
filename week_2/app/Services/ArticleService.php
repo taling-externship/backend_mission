@@ -22,7 +22,7 @@ class ArticleService implements ArticleInterface
         ]);
     }
 
-    public function createForm(): View
+    public function createForm(): View | RedirectResponse
     {
         if (Gate::denies('create', Article::class)) {
             return redirect('/login');
@@ -104,6 +104,9 @@ class ArticleService implements ArticleInterface
 
     public function delete($article): RedirectResponse
     {
+        if (Gate::denies('update', $article)) {
+            return abort(403, 'You are not permitted');
+        }
         $article->delete();
         return redirect(route('article.index'))->with('success', 'Your Article is deleted well');
     }

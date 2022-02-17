@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 
 interface ArticleInterface
 {
-    public function createForm(): View;
+    public function createForm(): View | RedirectResponse;
     public function store(array $params): RedirectResponse;
     public function getList(): View;
     public function getOne($article): View;

@@ -46,6 +46,9 @@
                                                         this.closest('form').submit();">
                                         {{ __('Log Out') }}
                                     </x-dropdown-link>
+                                    <x-dropdown-link :href="route('article.create')">
+                                        Make New
+                                    </x-dropdown-link>
                                 </form>
                             </x-slot>
                         </x-dropdown>

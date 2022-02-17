@@ -27,8 +27,9 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\RedirectResponse : if not login user
      */
-    public function create(): View
+    public function create(): View | RedirectResponse
     {
         return $this->service->createForm();
     }

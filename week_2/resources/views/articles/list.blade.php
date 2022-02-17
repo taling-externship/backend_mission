@@ -20,18 +20,16 @@
     </section>
 
     @if( $articles )
-    <section class="pagination">
+    <section class="pagination flex px-8 my-4 justify-between">
+        <div class="control my-4">
+            @can('create', 'App\\Models\\Article')
+            <x-forms.anchor
+            href="{{ route('article.create') }}"
+            color="blue"
+            name="make new" />
+            @endcan
+        </div>
         {{ $articles->links() }}
     </section>
     @endif
-
-    <section class="control my-4">
-        @can('create', 'App\\Models\\Article')
-        <x-forms.anchor
-        href="{{ route('article.create') }}"
-        color="blue"
-        name="make new" />
-        @endcan
-    </section>
-
 </x-app-layout>

@@ -3,29 +3,26 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ArticleCreateTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->signable = User::create(User::factory()->make()->makeVisible('password')->toArray());
+    }
+
     public function test_success_store()
     {
         $this->assertDatabaseMissing('articles', [
             'title' => 'test',
         ]);
 
-        $user = User::factory()->create();
-        Auth::login($user);
-
-        $response = $this->post('/article', [
+        $response = $this->actingAs($this->signable)->post('/article', [
             'title' => 'test',
             'body' => 'hello',
         ]);
@@ -40,10 +37,7 @@ class ArticleCreateTest extends TestCase
 
     public function test_fail_store_without_required()
     {
-        $user = User::factory()->create();
-        Auth::login($user);
-
-        $response = $this->post('/article', [
+        $response = $this->actingAs($this->signable)->post('/article', [
             'title' => null,
             'body' => 'blind'
         ]);
@@ -54,20 +48,24 @@ class ArticleCreateTest extends TestCase
 
         $response->assertSessionHas('errors', function ($v) {
             return str_contains($v->get('title')[0], 'required');
-        });
-        $response->assertStatus(302);
+        })->assertStatus(302);
+    }
+
+    /** @test */
+    public function test_fail_store_without_login()
+    {
+        $this->get(route('article.create'))
+            ->assertStatus(302)
+            ->assertRedirect('login');
     }
 
     public function test_success_store_with_tag()
     {
-        $user = User::factory()->create();
-        Auth::login($user);
-
         $this->assertDatabaseMissing('tags', [
             'name' => 'test',
         ]);
 
-        $this->post('/article', [
+        $this->actingAs($this->signable)->post('/article', [
             'title' => 'test',
             'body' => 'hello',
             'tags' => ['test'],

@@ -5,41 +5,54 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleDeleteTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->signable = User::create(User::factory()->make()->makeVisible('password')->toArray());
+    }
+
     public function test_delete()
     {
-        $user = User::factory()->create();
-        Auth::login($user);
-
-        Article::factory(3, ['user_id' => Auth::id()])->create();
+        Article::factory(3, ['user_id' => $this->signable->id])->create();
 
         $deleteCandidate = Article::find(2);
 
-        $response = $this->delete(route('article.destroy', 2));
+        $this->actingAs($this->signable)->delete(route('article.destroy', 2))
+            ->assertStatus(302)
+            ->assertRedirect('article');
 
-        $response->assertStatus(302);
+        $this->get(route('article.index'))
+            ->assertViewMissing($deleteCandidate)
+            ->assertSee(Article::find(1)->title)
+            ->assertSee(Article::find(3)->title);
 
-        $response = $this->get(route('article.index'));
+        $this->get(route('article.show', 1))
+            ->assertStatus(200);
 
-        $response->assertViewMissing($deleteCandidate);
-        $response->assertSee(Article::find(1)->title);
-        $response->assertSee(Article::find(3)->title);
+        $this->get(route('article.show', 2))
+            ->assertStatus(404);
+    }
 
-        $response = $this->get(route('article.show', 1));
-        $response->assertStatus(200);
+    /** @test */
+    public function test_failed_delete_without_login()
+    {
+        Article::factory(3, ['user_id' => $this->signable->id])->create();
 
-        $response = $this->get(route('article.show', 2));
-        $response->assertStatus(404);
+        $deleteCandidate = Article::find(2);
+
+        $this->delete(route('article.destroy', 2))
+            ->assertStatus(403);
+
+        $this->get(route('article.index'))
+            ->assertSee($deleteCandidate->title);
+
+        $this->get(route('article.show', 2))
+            ->assertStatus(200);
     }
 }
