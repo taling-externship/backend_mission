@@ -2,34 +2,29 @@
 
 namespace Tests\Feature;
 
-use Exception;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleUpdateTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->signable = User::create(User::factory()->make()->makeVisible('password')->toArray());
+    }
+
     public function test_edit()
     {
-        $user = User::factory()->create();
-        $article = Article::factory(1, ['user_id' => $user->id])->create();
-
-        Auth::loginUsingId($user->id);
-
-        $response = $this->get('/article/1/edit');
-
-        $response->assertStatus(200);
-        $response->assertViewHas('article', $article->first());
-        $response->assertViewIs('articles.form');
+        $article = Article::factory(['user_id' => $this->signable])->create();
+        $this->actingAs($this->signable)
+            ->get($article->path . "/edit")
+            ->assertStatus(200)
+            ->assertViewHas('article', $article)
+            ->assertViewIs('articles.form');
     }
 
     public function test_update_success()
@@ -37,24 +32,20 @@ class ArticleUpdateTest extends TestCase
         $prev = Article::create([
             'title' => 'before',
             'body' => 'before',
-            'user_id' => User::factory()->create()->id,
+            'user_id' => $this->signable->id,
         ]);
 
-        $response = $this->patch("/article/{$prev->id}", [
+        $this->actingAs($this->signable)
+            ->patch($prev->path, [
+                'title' => 'after',
+                'body' => 'after',
+            ])->assertStatus(302);
+
+        $this->assertDatabaseHas('articles', [
             'title' => 'after',
             'body' => 'after',
-            'user_id' => User::factory()->create()->id,
         ]);
 
-        $after = Article::find($prev->id);
-
-        if ($prev->title === $after->title || $prev->body === $after->body) {
-            throw new Exception('data is not modified');
-        }
-
-        $response->assertStatus(302);
-
-        $response = $this->get('/article/1');
-        $response->assertSee('after');
+        $this->get('/article/1')->assertSee('after');
     }
 }

@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -24,26 +23,20 @@ class ArticleReadTest extends TestCase
 
     public function test_can_see_all_articles()
     {
-        User::factory()->create();
-        Article::factory(5)->create();
+        Article::factory()->create();
 
-        $response = $this->get('/article');
-        $articles = Article::latest()->with('tags')->paginate(15);
-
-        $response->assertStatus(200);
-        $response->assertViewHas('articles', $articles);
+        $this->get('/article')
+            ->assertStatus(200)
+            ->assertSee(Article::latest()->with('tags')->paginate(15))
+            ->assertDontSee(Article::factory()->make());
     }
 
-    public function test_cat_see_one_article()
+    public function test_can_see_one_article()
     {
-        Article::create([
-            'title' => $this->faker->sentence(),
-            'body' => $this->faker->paragraph(),
-            'user_id' => User::factory()->create()->id,
-        ]);
+        $article = Article::factory()->create();
 
-        $response = $this->get('/article/1');
-        $response->assertStatus(200);
-        $response->assertViewHas('article', Article::find(1));
+        $this->get($article->path)
+            ->assertStatus(200)
+            ->assertViewHas('article', $article);
     }
 }
