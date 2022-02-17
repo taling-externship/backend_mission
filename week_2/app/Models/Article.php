@@ -34,4 +34,17 @@ class Article extends Model
     {
         return route('article.show', $this);
     }
+
+    public function love()
+    {
+        return $this->hasMany(Love::class);
+    }
+
+    public function getMyLovedAttribute()
+    {
+        return auth()->check() ? $this->love()->where([
+            'user_id' => auth()->user()->id,
+            'article_id' => $this->id,
+        ])->first() : false;
+    }
 }

@@ -2,74 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Article\LoveRequest;
 use App\Models\Love;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Services\LoveService;
 
 class LoveController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct(private LoveService $service)
     {
-        //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Article $article)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Love  $love
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Love $love)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Love  $love
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Love $love)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Love  $love
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Love $love)
-    {
-        //
+        return $this->service->store($article);
     }
 
     /**
@@ -78,8 +30,8 @@ class LoveController extends Controller
      * @param  \App\Models\Love  $love
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Love $love)
+    public function destroy(Article $article, Love $love)
     {
-        //
+        return $this->service->destroy($article, $love);
     }
 }

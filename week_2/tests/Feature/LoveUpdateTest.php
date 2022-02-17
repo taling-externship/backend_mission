@@ -63,8 +63,8 @@ class LoveUpdateTest extends TestCase
             'user_id' => $this->signable->id
         ])->create();
 
-        $this->delete($this->article->path . '/love')
-            ->assertStatus(302);
+        $this->delete($this->article->path . '/love/' . $this->article->myLoved)
+            ->assertStatus(405);
 
         $this->assertDatabaseCount('loves', $cnt + 1);
         $this->assertDatabaseHas('loves', [
@@ -83,7 +83,7 @@ class LoveUpdateTest extends TestCase
             'user_id' => $this->signable->id
         ])->create();
 
-        $this->actingAs($this->signable)->delete($this->article->path . '/love')
+        $this->actingAs($this->signable)->delete($this->article->path . '/love/' . $this->article->myLoved->id)
             ->assertStatus(302);
 
         $this->assertDatabaseCount('loves', $cnt);

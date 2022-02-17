@@ -42,6 +42,6 @@ class LoveReadTest extends TestCase
         ])->create();
         $this->actingAs($this->signable)->get('/article')
             ->assertSee('loves-count')
-            ->assertSee('include me');
+            ->assertSee('include-me');
     }
 }
