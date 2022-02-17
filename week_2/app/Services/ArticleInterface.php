@@ -2,15 +2,17 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Article;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 
 interface ArticleInterface
 {
-    public function createForm();
-    public function store();
-    public function getList();
-    public function getOne($article);
-    public function editForm($article);
-    public function update($article);
-    public function delete($article);
+    public function createForm(): View;
+    public function store(array $params): RedirectResponse;
+    public function getList(): View;
+    public function getOne($article): View;
+    public function editForm($article): View;
+    public function update(array $params, Article $article): RedirectResponse;
+    public function delete($article): RedirectResponse;
 }
