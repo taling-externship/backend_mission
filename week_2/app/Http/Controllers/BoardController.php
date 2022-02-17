@@ -24,14 +24,15 @@ class BoardController extends Controller
      * [View] 목록 페이지
      * @return Application|Factory|View
      */
-    public function list(Request $search): Application|Factory|View
+    public function list(Request $search)
     {
-        $boards = Board::where('is_show', true);
-        if (isset($search['search'])) {
-            $keyword = Str::of($search['search'])->trim();
-            $boards = $boards->where('title', 'LIKE', "%$keyword%");
-        }
-        $boards = $boards->paginate(15);
+        $boards = $this->boardService->listView();
+        // $boards = Board::where('is_show', true);
+        // if (isset($search['search'])) {
+        //     $keyword = Str::of($search['search'])->trim();
+        //     $boards = $boards->where('title', 'LIKE', "%$keyword%");
+        // }
+        // $boards = $boards->paginate(15);
         return view('boards.list', compact('boards'));
     }
 
