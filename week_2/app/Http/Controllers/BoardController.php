@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Board\BoardUpdateRequest;
 use App\Http\Requests\Board\BoardWriteRequest;
 use App\Models\Board;
+use App\Services\Board\BoardInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,6 +15,11 @@ use Illuminate\Support\Str;
 
 class BoardController extends Controller
 {
+
+    public function __construct(private BoardInterface $boardService)
+    {
+    }
+
     /**
      * [View] 목록 페이지
      * @return Application|Factory|View
