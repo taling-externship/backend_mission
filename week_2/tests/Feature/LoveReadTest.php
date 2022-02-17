@@ -23,29 +23,25 @@ class LoveReadTest extends TestCase
     public function test_anyone_can_see_love_count_at_list_page()
     {
         $this->get('/article')
-            ->assertSee('lovesCount');
+            ->assertSee('loves-count');
     }
 
     /** @test */
     public function test_anyone_can_see_love_count_at_article_detail_page()
     {
         $this->get($this->article->path)
-            ->assertSee('lovesCount');
+            ->assertSee('loves-count');
     }
 
     /** @test */
-    public function test_can_see_love_my_loved_article_login_user()
+    public function test_can_see_my_loved_article_login_user()
     {
-        $this->get('/article')
-            ->assertSee('lovesCount')
+        Love::factory([
+            'article_id' => $this->article->id,
+            'user_id' => $this->signable->id,
+        ])->create();
+        $this->actingAs($this->signable)->get('/article')
+            ->assertSee('loves-count')
             ->assertSee('include me');
-    }
-
-    /** @test */
-    public function test_cant_see_love_my_loved_article_no_login_user()
-    {
-        $this->get($this->article->path)
-            ->assertSee('lovesCount')
-            ->assertDontSee('include me');
     }
 }
