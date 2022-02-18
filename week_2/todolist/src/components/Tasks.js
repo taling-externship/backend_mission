@@ -1,9 +1,16 @@
+import Task from "./Task";
+
 const Tasks = (props) => {
     return (
         <>
             <ul>
                 {props.taskList.map((task, idx) => (
-                    <li key={idx}>{task}</li>
+                    <Task
+                        key={task.id}
+                        task={task}
+                        toggleTask={props.toggleTask}
+                        handleX={props.handleX}
+                    />
                 ))}
             </ul>
         </>

@@ -1,16 +1,23 @@
 import React from "react";
 
 const CreateForm = (props) => {
-    const [task, setTask] = React.useState("");
+    const [task, setTask] = React.useState({
+        id: 1,
+        description: "",
+        checked: false,
+    });
+
+    const [lastId, setLastId] = React.useState(1);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLastId(lastId + 1);
         props.addTask(task);
-        setTask("");
+        setTask({ id: lastId, description: "", checked: false });
     };
 
     const handleChange = (e) => {
-        setTask(e.target.value);
+        setTask({ id: lastId, description: e.target.value, checked: false });
     };
 
     return (
@@ -22,7 +29,7 @@ const CreateForm = (props) => {
                 <input
                     type="text"
                     className="block w-full p-3"
-                    value={task}
+                    value={task.description}
                     onChange={handleChange}
                 />
                 <input

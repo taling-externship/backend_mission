@@ -18,7 +18,7 @@ class ArticleService implements ArticleInterface
     public function getList(): View
     {
         return view('articles.list', [
-            'articles' => $this->model->latest()->with('tags')->paginate(15),
+            'articles' => $this->model->latest()->with('tags')->with('love')->paginate(15),
         ]);
     }
 

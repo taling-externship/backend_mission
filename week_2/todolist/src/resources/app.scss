@@ -9,3 +9,23 @@ h1 {
 li {
     color: white;
 }
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: greenyellow;
+    margin-bottom: 1em;
+    border: 2px solid green;
+    padding: 1em;
+    border-radius: 1em;
+
+    input[type="checkbox"] {
+        transform: scale(2);
+    }
+
+    .done {
+        text-decoration: line-through;
+        color: gray;
+    }
+}
