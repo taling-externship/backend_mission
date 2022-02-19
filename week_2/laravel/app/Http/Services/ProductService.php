@@ -8,6 +8,7 @@ use App\Models\Market;
 use App\Models\Product;
 use App\Requests\Product\IndexRequest;
 use App\Requests\Product\StoreRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductService
 {
@@ -37,31 +38,32 @@ class ProductService
             'description' => $request->getDescription(),
             'price' => $request->getPrice(),
             'sale_price' => $request->getSalePrice(),
-            'thumb_img_path' => $request->getThumbImg()->store(Product::THUMB_IMG_PATH, 'public'),
+            'thumb_img_path' => $request->getThumbImg()->store(Product::thumbImgPath(), 'public'),
+            'user_id' => Auth::user()->id,
             'category_id' => $request->getCategoryId(),
             'market_id' => $request->getMarketId(),
-        ]);
+        ])->serial_number;
     }
 
-    public function update(StoreRequest $request, $serialNumber)
+    public function update(StoreRequest $request, $product)
     {
-        $product = $this->findBySerialNumber($serialNumber);
-
         return tap($product)->update([
             'name' => $request->getName(),
             'display_name' => $request->getDisplayName(),
             'description' => $request->getDescription(),
             'price' => $request->getPrice(),
             'sale_price' => $request->getSalePrice(),
-            'thumb_img_path' => optional($request->getThumbImg())->store(Product::THUMB_IMG_PATH, 'public') ?? $product->thumb_img_path,
+            'thumb_img_path' => optional($request->getThumbImg())->store(Product::thumbImgPath(), 'public') ?? $product->thumb_img_path,
             'category_id' => $request->getCategoryId(),
             'market_id' => $request->getMarketId(),
-        ]);
+        ])->serial_number;
     }
 
-    public function destroy($serialNumber)
+    public function destroy($product)
     {
-        return tap($this->findBySerialNumber($serialNumber))->delete();
+        $product = tap($product)->delete();
+
+        return $product->serial_number;
     }
 
     public function getAllCategory()
@@ -82,5 +84,10 @@ class ProductService
     public function hasCategory($category)
     {
         return $category && $category !== IndexRequest::CATEGORY_ALL;
+    }
+
+    public function getProductModel()
+    {
+        return Product::class;
     }
 }

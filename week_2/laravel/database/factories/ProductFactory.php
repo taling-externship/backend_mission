@@ -15,7 +15,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $files = collect(Storage::disk('public')->files('uploads/product'))
+        $files = collect(Storage::disk('public')->files('uploads/product/2022/02/01'))
         ->reject(fn ($file) => $file === 'uploads/product/.DS_Store')
         ->values()
         ->toArray();

@@ -17,19 +17,19 @@ class ProductFavoritesController extends Controller
 
     public function store($serialNumber)
     {
-        $this->service->add($serialNumber);
+        $productSerialNumber = $this->service->add($serialNumber);
 
         Notify::success('현재 상품 좋아요', 'Success');
 
-        return redirect()->route('products.show', $serialNumber);
+        return redirect()->route('products.show', $productSerialNumber);
     }
 
     public function destroy($serialNumber)
     {
-        $this->service->delete($serialNumber);
+        $productSerialNumber = $this->service->delete($serialNumber);
 
         Notify::success('현재 상품 좋아요 취소', 'Success');
 
-        return redirect()->route('products.show', $serialNumber);
+        return redirect()->route('products.show', $productSerialNumber);
     }
 }

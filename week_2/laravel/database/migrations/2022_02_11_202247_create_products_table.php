@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('serial_number')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('market_id');
             $table->string('name', 100);
@@ -31,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->float('review_point')->default(0);
             $table->softDeletes();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('market_id')->references('id')->on('markets')->onDelete('cascade');
 

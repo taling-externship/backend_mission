@@ -15,7 +15,12 @@ class Product extends Model
 
     protected $guarded = [];
 
-    const THUMB_IMG_PATH = 'uploads/product';
+    const THUMB_IMG_PATH = 'uploads/product/';
+
+    public static function thumbImgPath()
+    {
+        return self::THUMB_IMG_PATH . date('Y/m/d');
+    }
 
     public function productReals()
     {

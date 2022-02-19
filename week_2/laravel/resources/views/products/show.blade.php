@@ -5,10 +5,13 @@
 @section('content')
     <section class="container section-prod-detail t-my-3">
         <div class="t-mb-2">
+            @can('update', $product)
             <a class="btn btn-primary t-mr-auto" href="{{ route('products.edit', $product->serial_number) }}">
                 <i class="fas fa-pen"></i>
                 수정
             </a>
+            @endcan
+            @can('delete', $product)
             <form class="t-inline-block t-mb-0" action="{{ route('products.destroy', $product->serial_number) }}" method="POST"
                   onsubmit="return confirm('정말 삭제하시겠습니까')">
                 @csrf
@@ -18,6 +21,7 @@
                     삭제
                 </button>
             </form>
+            @endcan
         </div>
         <div class="t-grid lg:t-grid-cols-[3fr_4fr] t-gap-3 t-items-start">
 

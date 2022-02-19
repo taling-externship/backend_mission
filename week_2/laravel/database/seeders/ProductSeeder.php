@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Market;
 use App\Models\Product;
 use App\Models\ProductReal;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -24,6 +25,7 @@ class ProductSeeder extends Seeder
         Category::factory(5)->create()->each(function ($category) {
             $category->products()->saveMany(
                 Product::factory(rand(10, 40))->make([
+                    'user_id' => rand(1, User::count()),
                     'market_id' => rand(1, Market::count())
                 ])
             )->each(function ($product) {
