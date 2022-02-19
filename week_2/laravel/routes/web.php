@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductFavoritesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,5 +20,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('products', ProductController::class);
+
+Route::post('/products/{serialNumber}/favorites', [ProductFavoritesController::class, 'store'])->name('product-favorites.store');
+Route::delete('/products/{serialNumber}/favorites', [ProductFavoritesController::class, 'destroy'])->name('product-favorites.destroy');
 
 Auth::routes();

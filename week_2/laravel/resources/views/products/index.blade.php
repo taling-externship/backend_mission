@@ -17,7 +17,7 @@
 
                 <form action="{{ route('products.index') }}">
                     <select name="category" class="form-select w-auto"
-                    onchange="$(this).closest('form').submit()">
+                            onchange="$(this).closest('form').submit()">
                         <option value="-1" disabled>==카테고리==</option>
                         <option value="all">전체</option>
                         @foreach($categories as $category)
@@ -87,6 +87,13 @@
                        href="{{ route('products.show', $product->serial_number) }}">
                         <span>{!! $product->colors !!}</span>
                     </a>
+
+                    @if ($product->isFavorited())
+                    <a class="t-text-center t-mt-3 t-no-underline t-text-[#ff0000] group-hover:t-text-blue-500"
+                       href="{{ route('products.show', $product->serial_number) }}">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    @endif
                 </li>
                 @endforeach
             </ul>

@@ -58,6 +58,31 @@
                             <span class="t-w-16 t-inline-block common-label">색상</span>
                             {!! $product->colors !!}
                         </li>
+                        <li class="list-group-item">
+                            <span class="t-w-16 t-inline-block common-label">좋아요</span>
+                            @auth
+                                @if ($product->isFavorited())
+                                <form method="POST" class="t-inline-block t-mb-0 one-text-button-form" action="{{ route('product-favorites.destroy', $product->serial_number) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="t-text-[#ff0000]">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </form>
+                                @else
+                                <form method="POST" class="t-inline-block t-mb-0 one-text-button-form" action="{{ route('product-favorites.store', $product->serial_number) }}">
+                                    @csrf
+                                    <button type="submit" class="t-text-[#ff0000]">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </form>
+                                @endif
+                            @else
+                            <a class="t-text-[#ff0000]" href="{{ route('login') }}">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            @endauth
+                        </li>
                     </ul>
                 </div>
 
