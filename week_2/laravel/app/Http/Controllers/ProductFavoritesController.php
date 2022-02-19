@@ -23,4 +23,13 @@ class ProductFavoritesController extends Controller
 
         return redirect()->route('products.show', $serialNumber);
     }
+
+    public function destroy($serialNumber)
+    {
+        $this->service->delete($serialNumber);
+
+        Notify::success('현재 상품 좋아요 취소', 'Success');
+
+        return redirect()->route('products.show', $serialNumber);
+    }
 }

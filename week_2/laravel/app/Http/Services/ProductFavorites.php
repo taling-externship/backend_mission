@@ -14,4 +14,12 @@ class ProductFavorites
 
         return $product->serial_number;
     }
+
+    public function delete($serialNumber)
+    {
+        $product = Product::findBySerialNumber($serialNumber);
+        $product->favorites()->detach(Auth::user()->id);
+
+        return $product->serial_number;
+    }
 }
