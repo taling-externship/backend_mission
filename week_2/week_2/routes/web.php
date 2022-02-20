@@ -19,3 +19,5 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('articles', ArticleController::class);
+
+Auth::routes();

@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
 
 @font-face {
     font-family: "GmarketSansMedium";
@@ -29,4 +31,9 @@ html > body {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+}
+
+a {
+   color: inherit;
+   text-decoration: inherit; 
 }
