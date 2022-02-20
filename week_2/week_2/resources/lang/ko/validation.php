@@ -31,7 +31,7 @@ return [
         'array' => 'The :attribute must have between :min and :max items.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
+    'confirmed' => '[:attribute] 비밀번호가 일치하지 않습니다.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
@@ -124,7 +124,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => '[:attribute], 이미 사용중입니다.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -159,7 +159,11 @@ return [
 
     'attributes' => [
         'title' => '제목',
-        'body' => '내용'
+        'body' => '내용',
+        'name' => '이름',
+        'email' => '이메일',
+        'password' => '비밀번호',
+        'password_confirmation' => '비밀번호 확인',
     ],
 
 ];

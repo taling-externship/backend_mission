@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\likedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +20,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('articles', ArticleController::class);
+
+Route::resource('/liked', 'LikedController');
 
 Auth::routes();

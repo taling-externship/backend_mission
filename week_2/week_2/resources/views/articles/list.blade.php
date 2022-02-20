@@ -7,7 +7,7 @@
         <div class="t-container t-mx-auto t-px-4">
             <div class="t-flex">
                 <h1 class="t-font-bold t-mr-auto">게시물 리스트</h1>
-                <a href="{{ route('articles.create') }}" class="btn btn-primary btn-sm">글 작성</a>
+                <a href="{{ route('articles.create') }}" class="btn btn-primary">글 작성</a>
             </div>
             <ul class="t-grid t-grid-cols-1 sm:t-grid-cols-2 lg:t-grid-cols-3 t-gap-4 t-mt-4">
                 @foreach ($articles as $article)
@@ -32,6 +32,13 @@
                                                 by {{ $article->user->name }}
                                             </span>
                                         </a>
+                                        @if($likedCheck != null)
+                                            @foreach($likedCheck as $likeCheck)
+                                                @if($likeCheck->articles_id == $article->id)
+                                                    <span class="fas fa-heart"></span>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
 
                                     <a href="{{ route('articles.show', $article->id) }}"

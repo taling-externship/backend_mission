@@ -39,6 +39,20 @@
                     {{ nl2br($article->body) }}
                 </div>
 
+                <div class="feeling_div"> 
+                    <div class="button-container like-container">
+                        @if($likeCheck == 0)
+                            <a class="feeling_a">
+                                <i class="fa fa-heart-o">Like {{$article->liked}} </i>    
+                            </a>
+                        @else
+                            <a class="feeling_a">
+                            <i class="fa fa-heart"> Like {{$article->liked}} </i>    
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="t-flex t-gap-4">
                     <a href="{{ route('articles.edit', $article->id) }}" href="#" class="btn btn-link">수정</a>
                     <form class="t-m-0" action="{{ route('articles.destroy', $article->id) }}" method="POST">

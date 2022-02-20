@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\LikeManager;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ArticleSaveRequest;
 
 class ArticleController extends Controller
-{
+{   
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +23,11 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('id', 'desc')->get();
+        
 
         return view('articles.list', [
             'articles' => $articles
+
         ]);
     }
 
@@ -42,10 +51,11 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleSaveRequest $request)
-    {
+    {   
+        $you = auth()->user();
         $validated = $request->validated();
         $article = new Article();
-        $article->user_id = 1;
+        $article->user_id = $you->id;
         $article->title = $validated['title'];
         $article->body = $validated['body'];
 
@@ -62,11 +72,21 @@ class ArticleController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Article  $article
+     * @param  \App\Models\LikeManager  $likeManager
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
-    {
-        return view('articles.detail', [
+    {   
+
+        $you = auth()->user(); 
+        $likedCheck = LikeManager::where(['user_id'=>$you->id, 'articles_id'=>$article->id, 'like_check'=>1])->get();
+        if($likedCheck == null){
+            $likeCheck = 0;
+        }
+        else{
+            $likeCheck = 1;
+        }
+        return view('articles.detail', compact('you','likeCheck'),[
             'article' => $article
         ]);
     }
@@ -78,7 +98,12 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Article $article)
-    {
+    {   
+        $you = auth()->user(); 
+        $likedCheck = LikeManager::where(['user_id'=>$you->id, 'articles_id'=>$article->id])->first();
+        if($likedCheck != null){
+
+        }
         return view('articles.save', [
             'pageMode' => 'edit',
             'article' => $article

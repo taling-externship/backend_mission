@@ -17,6 +17,7 @@ class ArticleFactory extends Factory
             'user_id' => rand(1, 10),
             'title' => $this->faker->sentence(),
             'body' => $this->faker->text(200),
+            'liked' => 0
         ];
     }
 }

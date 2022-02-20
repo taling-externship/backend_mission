@@ -37,3 +37,19 @@ a {
    color: inherit;
    text-decoration: inherit; 
 }
+
+.feeling_div {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  } 
+  .button-container {
+    margin-left: 20px;
+  }
+  .feeling_a {
+    background-color: #fff;
+    border: 2px solid #2199e8;
+    padding: 10px 20px;
+    border-radius: 2px;
+    color: #2199e8;
+  }     

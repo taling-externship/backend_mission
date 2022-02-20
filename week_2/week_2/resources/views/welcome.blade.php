@@ -5,7 +5,7 @@
 @section('content')
     <section class="t-flex-grow t-flex t-items-center t-justify-center">
         <span>
-            유니콘은 당신의 문제를 해결합니다.
+            익스턴십 열심히 하자
         </span>
     </section>
 @endsection

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>유니콘 - @yield('title')</title>
+    <title>익스턴십 페이지 - @yield('title')</title>
     <link href="{{ asset('css/app_1.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app_2.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -17,9 +17,9 @@
     <header class="t-top-bar t-fixed t-top-0 t-left-0 t-w-full t-z-50 t-h-10 t-shadow t-text-gray-500 t-bg-white t-pr-2">
         <div class="t-container t-mx-auto t-h-full t-flex">
             <a href="{{ route('home') }}" class="t-flex t-items-center t-px-4">
-                <i class="fas fa-horse-head"></i>
+                <i class="fa fa-school"></i>
                 <span class="t-hidden sm:t-block">&nbsp;</span>
-                <span class="t-hidden sm:t-block t-pt-1">유니콘</span>
+                <span class="t-hidden sm:t-block t-pt-1">익스턴십</span>
             </a>
             <div class="t-flex-grow"></div>
             <nav class="menu-1">
@@ -39,27 +39,41 @@
                             <span class="t-hidden sm:t-block t-pt-1">게시물</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="t-h-full t-flex t-items-center px-2">
-                            <i class="fas fa-info"></i>
-                            <span class="t-hidden sm:t-block">&nbsp;</span>
-                            <span class="t-hidden sm:t-block t-pt-1">앱 정보</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="t-h-full t-flex t-items-center px-2">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="t-hidden sm:t-block">&nbsp;</span>
-                            <span class="t-hidden sm:t-block t-pt-1">로그아웃</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="t-h-full t-flex t-items-center px-2">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span class="t-hidden sm:t-block">&nbsp;</span>
-                            <span class="t-hidden sm:t-block t-pt-1">로그인</span>
-                        </a>
-                    </li>
+                    @guest
+                        <li>
+                            <a href="{{ route('register')}}" class="t-h-full t-flex t-items-center px-2">
+                                <i class="fas fa-user-plus"></i>
+                                <span class="t-hidden sm:t-block">&nbsp;</span>
+                                <span class="t-hidden sm:t-block t-pt-1">회원가입</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('login')}}" class="t-h-full t-flex t-items-center px-2">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span class="t-hidden sm:t-block">&nbsp;</span>
+                                <span class="t-hidden sm:t-block t-pt-1">로그인</span>
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="#" class="t-h-full t-flex t-items-center px-2">
+                                <i class="fas fa-address-card"></i>
+                                <span class="t-hidden sm:t-block">&nbsp;</span>
+                                <span class="t-hidden sm:t-block t-pt-1">{{ Auth::user()->name }}'s 마이페이지</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout')}}" class="t-h-full t-flex t-items-center px-2"
+                                onclick="document.logout_form.submit(); return false;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span class="t-hidden sm:t-block">&nbsp;</span>
+                                <span class="t-hidden sm:t-block t-pt-1">로그아웃</span>
+                            </a>
+                            <form method="POST" name="logout_form" action="{{ route('logout') }}" class="t-hidden">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
                 </ul>
             </nav>
         </div>
