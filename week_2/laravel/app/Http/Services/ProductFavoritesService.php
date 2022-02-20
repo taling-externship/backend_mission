@@ -5,7 +5,7 @@ namespace App\Http\Services;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
-class ProductFavorites
+class ProductFavoritesService
 {
     public function add($serialNumber)
     {

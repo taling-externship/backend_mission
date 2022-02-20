@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Notify;
-use App\Http\Services\ProductFavorites;
+use App\Http\Services\ProductFavoritesService;
 
 class ProductFavoritesController extends Controller
 {
     protected $service;
 
-    public function __construct(ProductFavorites $service)
+    public function __construct(ProductFavoritesService $service)
     {
         $this->middleware('auth');
         $this->service = $service;
