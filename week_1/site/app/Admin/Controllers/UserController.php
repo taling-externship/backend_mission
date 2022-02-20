@@ -69,9 +69,9 @@ class UserController extends AdminController
     {
         $form = new Form(new User());
 
-        $form->saving(function ($form){
-            if($form->password && $form->model()->password != $form->password){
-                $form->password = bcrypt($form->password); // 법적으로 암호화가 되어서 저장되게 되어있다.
+        $form->saving(function ($form) {
+            if ($form->password && $form->model()->password != $form->password) {
+                $form->password = bcrypt($form->password);
             }
         });
 
