@@ -23,10 +23,11 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('id', 'desc')->get();
-        
+        $likedCheck = LikeManager::get();
 
         return view('articles.list', [
-            'articles' => $articles
+            'articles' => $articles,
+            'likedCheck' => $likedCheck
 
         ]);
     }
@@ -79,8 +80,8 @@ class ArticleController extends Controller
     {   
 
         $you = auth()->user(); 
-        $likedCheck = LikeManager::where(['user_id'=>$you->id, 'articles_id'=>$article->id, 'like_check'=>1])->get();
-        if($likedCheck == null){
+        $likesCheck = LikeManager::where(['user_id'=>$you->id, 'articles_id'=>$article->id, 'like_check'=>1])->get();
+        if($likesCheck == null){
             $likeCheck = 0;
         }
         else{

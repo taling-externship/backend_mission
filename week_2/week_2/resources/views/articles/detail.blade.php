@@ -42,7 +42,9 @@
                 <div class="feeling_div"> 
                     <div class="button-container like-container">
                         @if($likeCheck == 0)
-                            <a class="feeling_a">
+                            
+                            <a class="feeling_a" href={{ route('liked') }} method="POST">
+                                @method('POST')
                                 <i class="fa fa-heart-o">Like {{$article->liked}} </i>    
                             </a>
                         @else

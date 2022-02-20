@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resource('articles', ArticleController::class);
+Route::post('liked', [LikedController::class, 'liked'])->name('liked');
 
-Route::resource('/liked', 'LikedController');
+Route::resource('articles', ArticleController::class);
 
 Auth::routes();
