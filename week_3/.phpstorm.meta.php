@@ -11,6 +11,7 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -36,7 +37,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -153,7 +154,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -190,6 +190,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -215,7 +216,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -332,7 +333,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -369,6 +369,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -394,7 +395,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -511,7 +512,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -548,6 +548,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -573,7 +574,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -690,7 +691,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -727,6 +727,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -752,7 +753,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -869,7 +870,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -906,6 +906,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -931,7 +932,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -1048,7 +1049,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -1085,6 +1085,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1110,7 +1111,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -1227,7 +1228,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -1264,6 +1264,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1289,7 +1290,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -1406,7 +1407,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -1443,6 +1443,7 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1468,7 +1469,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -1585,7 +1586,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -1622,6 +1622,7 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1647,7 +1648,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -1764,7 +1765,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -1801,6 +1801,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
+            'App\Services\Board\BoardInterface' => \App\Services\Board\BoardService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1826,7 +1827,7 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\ScheduleTestCommand' => \Illuminate\Console\Scheduling\ScheduleTestCommand::class,
             'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
-            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
+            'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\NullBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
             'Illuminate\Contracts\Debug\ExceptionHandler' => \NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler::class,
             'Illuminate\Contracts\Http\Kernel' => \App\Http\Kernel::class,
@@ -1943,7 +1944,6 @@ namespace PHPSTORM_META {
             'db.connection' => \Illuminate\Database\MySqlConnection::class,
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
-            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
