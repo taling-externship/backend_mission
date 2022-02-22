@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 
 class LoveService
 {
@@ -14,7 +15,7 @@ class LoveService
     {
     }
 
-    public function store(Article $article)
+    public function store(Article $article): RedirectResponse
     {
         if (Gate::denies('create', $this->model)) {
             return redirect('/login');
