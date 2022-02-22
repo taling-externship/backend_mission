@@ -3,16 +3,15 @@
 namespace App\Services;
 
 use App\Models\Article;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 interface ArticleInterface
 {
-    public function createForm(): View | RedirectResponse;
-    public function store(array $params): RedirectResponse;
-    public function getList(): View;
-    public function getOne($article): View;
-    public function editForm($article): View;
-    public function update(array $params, Article $article): RedirectResponse;
-    public function delete($article): RedirectResponse;
+    public function getList(): View | JsonResponse;
+    public function store(array $params): RedirectResponse | JsonResponse;
+    public function getOne($article): View | JsonResponse;
+    public function update(array $params, Article $article): RedirectResponse | JsonResponse;
+    public function delete($article): RedirectResponse | JsonResponse;
 }

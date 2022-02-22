@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Services\ArticleInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Article\ArticleRequest;
+use App\Services\AbstractArticleService;
+use Illuminate\Http\JsonResponse;
 
 class ArticleController extends Controller
 {
-    public function __construct(private ArticleInterface $service)
+    public function __construct(private AbstractArticleService $service)
     {
     }
     /**
@@ -18,7 +19,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(): View
+    public function index(): View | RedirectResponse | JsonResponse
     {
         return $this->service->getList();
     }
@@ -40,7 +41,7 @@ class ArticleController extends Controller
      * @param  \App\Http\Requests\Article\ArticleRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ArticleRequest $request): RedirectResponse
+    public function store(ArticleRequest $request): RedirectResponse | JsonResponse
     {
         return $this->service->store($request->validated());
     }
@@ -51,7 +52,7 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(Article $article): View
+    public function show(Article $article): View | JsonResponse
     {
         return $this->service->getOne($article);
     }
@@ -74,7 +75,7 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ArticleRequest $request, Article $article): RedirectResponse
+    public function update(ArticleRequest $request, Article $article): RedirectResponse | JsonResponse
     {
         return $this->service->update($request->validated(), $article);
     }
@@ -85,7 +86,7 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Article $article): RedirectResponse
+    public function destroy(Article $article): RedirectResponse | JsonResponse
     {
         return $this->service->delete($article);
     }
