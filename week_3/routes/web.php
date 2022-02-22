@@ -28,3 +28,7 @@ Route::get('/boards/create', [BoardController::class, 'create'])->name('boards.c
 Route::post('/boards/write', [BoardController::class, 'write'])->name('boards.write');
 Route::post('/boards/update', [BoardController::class, 'update'])->name('boards.update');
 Route::delete('/boards/delete/{id}', [BoardController::class, 'delete'])->name('boards.delete');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
