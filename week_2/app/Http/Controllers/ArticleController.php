@@ -6,7 +6,7 @@ use App\Models\Article;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Article\ArticleRequest;
-use App\Services\AbstractArticleService;
+use App\Contracts\AbstractArticleService;
 use Illuminate\Http\JsonResponse;
 
 class ArticleController extends Controller

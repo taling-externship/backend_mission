@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Tag;
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use App\Repositories\ArticleRepository;
+use App\Contracts\AbstractArticleService;
 
 class ArticleService extends AbstractArticleService
 {

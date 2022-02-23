@@ -25,4 +25,4 @@ Route::resource('/v1/article', 'App\Http\Controllers\ArticleController')
     ->middleware('auth:sanctum')->only(['store', 'update', 'destroy']);
 
 Route::resource('/v1/article/{article}/love', 'App\Http\Controllers\LoveController')
-    ->only(['store', 'destroy']);
+    ->middleware('auth:sanctum')->only(['store', 'destroy']);

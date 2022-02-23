@@ -2,13 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Tag;
 use App\Models\Article;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\RedirectResponse;
 use App\Repositories\ArticleRepository;
+use App\Contracts\AbstractArticleService;
 
 class ApiArticleService extends AbstractArticleService
 {
@@ -51,6 +49,13 @@ class ApiArticleService extends AbstractArticleService
 
     public function update(array $params, Article $article): JsonResponse
     {
+        if (Gate::denies('update', $article)) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => "You don't have a permission",
+            ]);
+        }
+
         $article = $this->repository->updateOneByArticle($article, $params);
 
         return response()->json([

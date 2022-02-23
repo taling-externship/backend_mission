@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Contracts;
 
 use App\Models\Article;
+use App\Contracts\ArticleInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 

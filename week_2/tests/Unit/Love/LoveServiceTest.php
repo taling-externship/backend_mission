@@ -27,7 +27,8 @@ class LoveServiceTest extends TestCase
         $this->actingAs($this->signable);
 
         $article = Article::factory()->create();
-        $service = new \App\Services\LoveService(new Love());
+        $repository = new \App\Repositories\LoveRepository(new Love());
+        $service = new \App\Services\LoveService($repository);
         $return = $service->store($article);
 
         $this->assertDatabaseCount('loves', 1);
@@ -46,7 +47,8 @@ class LoveServiceTest extends TestCase
 
         $this->actingAs($this->signable);
 
-        $service = new \App\Services\LoveService(new Love());
+        $repository = new \App\Repositories\LoveRepository(new Love());
+        $service = new \App\Services\LoveService($repository);
         $return = $service->destroy($love->article, $love);
 
         $this->assertDatabaseCount('loves', 0);

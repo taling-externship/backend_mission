@@ -2,28 +2,28 @@
 
 namespace App\Services;
 
+use App\Contracts\LoveInterface;
 use App\Models\Love;
 use App\Models\User;
 use App\Models\Article;
+use App\Repositories\LoveRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 
-class LoveService
+class LoveService implements LoveInterface
 {
-    public function __construct(private Love $model)
+    public function __construct(private LoveRepository $repository)
     {
     }
 
     public function store(Article $article): RedirectResponse
     {
-        if (Gate::denies('create', $this->model)) {
+        if (Gate::denies('create', [Love::class])) {
             return redirect('/login');
         }
-        $this->model->create([
-            'article_id' => $article->id,
-            'user_id' => auth()->user()->id,
-        ]);
+
+        $this->repository->store($article);
 
         return redirect($article->path);
     }
@@ -34,7 +34,7 @@ class LoveService
             return abort(405, 'You aren\'t authorized');
         }
 
-        $love->delete();
+        $this->repository->destroy($love);
 
         return redirect(route('article.index'));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\LoveInterface;
 use App\Http\Requests\Article\LoveRequest;
 use App\Models\Love;
 use App\Models\Article;
@@ -10,7 +11,7 @@ use App\Services\LoveService;
 
 class LoveController extends Controller
 {
-    public function __construct(private LoveService $service)
+    public function __construct(private LoveInterface $service)
     {
     }
     /**
