@@ -33,8 +33,11 @@ class ApiAuthService
             ], 422);
         }
 
+        $user = User::where('email', $params['email'])->first();
+
         return response()->json([
-            'access_token' => User::where('email', $params['email'])->first()->createToken('auth_token')->plainTextToken,
+            ...$user->toArray(),
+            'access_token' => $user->createToken('auth_token')->plainTextToken,
             'token_type' => 'Bearer',
         ]);
     }

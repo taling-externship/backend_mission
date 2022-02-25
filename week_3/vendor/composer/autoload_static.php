@@ -202,7 +202,6 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         ),
         'A' => 
         array (
-            'Asm89\\Stack\\' => 12,
             'App\\' => 4,
         ),
     );
@@ -507,7 +506,8 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         ),
         'Fruitcake\\Cors\\' => 
         array (
-            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+            0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
+            1 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
         ),
         'Faker\\' => 
         array (
@@ -617,10 +617,6 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src',
         ),
-        'Asm89\\Stack\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -648,6 +644,7 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Contracts\\AbstractArticleService' => __DIR__ . '/../..' . '/app/Contracts/AbstractArticleService.php',
         'App\\Contracts\\ArticleInterface' => __DIR__ . '/../..' . '/app/Contracts/ArticleInterface.php',
+        'App\\Contracts\\LoveInterface' => __DIR__ . '/../..' . '/app/Contracts/LoveInterface.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ArticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArticleController.php',
         'App\\Http\\Controllers\\Auth\\ApiAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ApiAuthController.php',
@@ -687,14 +684,14 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Repositories\\ArticleRepository' => __DIR__ . '/../..' . '/app/Repositories/ArticleRepository.php',
+        'App\\Repositories\\LoveRepository' => __DIR__ . '/../..' . '/app/Repositories/LoveRepository.php',
         'App\\Services\\ApiArticleService' => __DIR__ . '/../..' . '/app/Services/ApiArticleService.php',
         'App\\Services\\ApiAuthService' => __DIR__ . '/../..' . '/app/Services/ApiAuthService.php',
+        'App\\Services\\ApiLoveService' => __DIR__ . '/../..' . '/app/Services/ApiLoveService.php',
         'App\\Services\\ArticleService' => __DIR__ . '/../..' . '/app/Services/ArticleService.php',
         'App\\Services\\LoveService' => __DIR__ . '/../..' . '/app/Services/LoveService.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
-        'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
-        'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
@@ -2083,7 +2080,9 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
         'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
+        'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
         'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',

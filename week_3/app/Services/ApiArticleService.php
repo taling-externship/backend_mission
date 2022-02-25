@@ -16,10 +16,7 @@ class ApiArticleService extends AbstractArticleService
 
     public function getList(): JsonResponse
     {
-        return response()->json([
-            'result' => 'success',
-            'data' => $this->repository->getListWithPagination(),
-        ]);
+        return response()->json($this->repository->getListWithPagination());
     }
 
     public function store(array $params): JsonResponse
@@ -33,18 +30,12 @@ class ApiArticleService extends AbstractArticleService
 
         $article = $this->repository->store($params);
 
-        return response()->json([
-            'result' => 'success',
-            'data' => $article->toArray(),
-        ]);
+        return response()->json($article->toArray());
     }
 
     public function getOne($article): JsonResponse
     {
-        return response()->json([
-            'result' => 'success',
-            'data' => $this->repository->getOneById($article->id)->toArray(),
-        ]);
+        return response()->json($this->repository->getOneById($article->id)->toArray());
     }
 
     public function update(array $params, Article $article): JsonResponse
@@ -60,7 +51,6 @@ class ApiArticleService extends AbstractArticleService
 
         return response()->json([
             'result' => 'success',
-            'data' => $article->toArray(),
         ]);
     }
 
