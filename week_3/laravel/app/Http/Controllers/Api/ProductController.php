@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function __construct(ProductService $service)
     {
-        $this->middleware('auth:api')->only('store', 'update');
+        $this->middleware('auth:api')->only('store', 'update', 'destroy');
         $this->service = $service;
     }
 
@@ -50,5 +50,15 @@ class ProductController extends Controller
         );
 
         return response()->json($productSerialNumber, 200);
+    }
+
+    public function destroy($serialNumber)
+    {
+        $product = $this->service->findBySerialNumber($serialNumber);
+        $this->authorize('delete', $product);
+
+        $productSerialNumber = $this->service->destroy($product);
+
+        return response()->noContent();
     }
 }
