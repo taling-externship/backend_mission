@@ -28,6 +28,11 @@ class Product extends Model
             ->orderBy('stock_quantity', 'desc');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function market()
     {
         return $this->belongsTo(Market::class);
@@ -61,6 +66,11 @@ class Product extends Model
             }, '');
     }
 
+    public function colors()
+    {
+        return self::productReals()->get()->map(fn ($productReal) => $productReal->rgb_color);
+    }
+
     public function getSalePriceInWonsAttribute()
     {
         return number_format($this->sale_price);
@@ -69,6 +79,11 @@ class Product extends Model
     public function getPriceInWonsAttribute()
     {
         return number_format($this->price);
+    }
+
+    public function getProductAtAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
     public function thumbnailUrl()
