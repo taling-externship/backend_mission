@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Facades\DataTransferObject;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Services\ProductService;
 use App\Requests\Product\IndexRequest as IndexDto;
@@ -17,7 +18,7 @@ class ProductController extends Controller
 
     public function __construct(ProductService $service)
     {
-        $this->middleware('auth:api')->only('create', 'store');
+        $this->middleware('auth:api')->only('store', 'update');
         $this->service = $service;
     }
 
@@ -36,5 +37,18 @@ class ProductController extends Controller
         );
 
         return response()->json($productSerialNumber, 201);
+    }
+
+    public function update(UpdateRequest $request, $serialNumber)
+    {
+        $product = $this->service->findBySerialNumber($serialNumber);
+        $this->authorize('update', $product);
+
+        $productSerialNumber = $this->service->update(
+            DataTransferObject::map(StoreDto::class, $request->all()),
+            $product
+        );
+
+        return response()->json($productSerialNumber, 200);
     }
 }
