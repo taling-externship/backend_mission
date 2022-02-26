@@ -34,3 +34,9 @@ npx tailwindcss init --full
 ```
     php artisan scout:import "App\Models\Article"
 ```
+
+## Rest API?
+
+-   현실적으로 너무 어려움
+-   HTTP API 로 일단 만들고, 공부를 좀 더 해봅시다.
+    http://slides.com/eungjun/rest#/1
