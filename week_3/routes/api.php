@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Article
+Route::get('articles',                   [\App\Http\Controllers\ArticleController::class, 'getArticles']);      // 전체 조회
+Route::post('articles',                  [\App\Http\Controllers\ArticleController::class, 'addArticle']);       // 특정 데이터 추가
+Route::put('articles',           [\App\Http\Controllers\ArticleController::class, 'update']);            // 데이터 업로드
+Route::delete('articles/{id}',           [\App\Http\Controllers\ArticleController::class, 'delete']);          // 데이터 삭제
+Route::get('articles/{slug_id}/{title}', [\App\Http\Controllers\ArticleController::class, 'getArticle']);       // 특정 데이터 조회
