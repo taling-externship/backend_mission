@@ -6,7 +6,6 @@ use App\Http\Requests\Article\CreateRequest;
 use App\Http\Requests\Article\UpdateRequest;
 use App\Models\Article;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -31,16 +30,16 @@ class ArticleController extends Controller
             'is_show' => true,
         ]);
 
-        return response()->json(['data' => $article, 'message' => '추가한 테이터를 전달함'], 200);
+        return response()->json(['data' => $article, 'message' => '추가한 테이터를 전달함'], 201);
     }
 
     /** 1개의 아티클 보여줌. */
-    public function getArticle(string $slug_id, string $slug): JsonResource
+    public function getArticle(string $slug_id, string $slug)
     {
         $articles = Article::where('slug_id', $slug_id)->where('is_show', true)->orderBy('id', 'asc')->firstOrFail();
 
         if ($articles->slug !== $slug) {
-            return redirect("/articles/$slug_id/$articles->slug");
+            return redirect("/api/articles/$slug_id/$articles->slug");
         }
         return response()->json(['data' => $articles, 'message' => 'show 데이터를 하나 전달함'], 200);
     }
@@ -49,17 +48,14 @@ class ArticleController extends Controller
     public function update(UpdateRequest $article): JsonResponse
     {
         $article = $article->validated();
-        $fields = Article::where('id', $article['id'])->update([
+        Article::where('id', $article['id'])->update([
             'title' => $article['title'],
+            'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($article['title']))),
             'content' => $article['content'],
             'is_show' => $article['is_show'],
         ]);
-
-        if ($fields) {
-            return response()->json(['data' => $fields, 'message' => '데이터를 업데이트 함'], 200);
-        }
-
-        return response()->json(['message' => '데이터 업데이트에 실패함'], 500);
+        $article = Article::findOrFail($article['id']);
+        return response()->json(['data' => $article, 'message' => '데이터를 업데이트 함'], 200);
     }
 
     /** 아티클 삭제. */
@@ -71,6 +67,6 @@ class ArticleController extends Controller
             return response()->json(['data' => $result, 'message' => '데이터 삭제에 성공함'], 200);
         }
 
-        return response()->json(['message' => 'a 데이터 삭제에 실패함'], 500);
+        return response()->json(['message' => 'a 데이터 삭제에 실패함'], 400);
     }
 }
