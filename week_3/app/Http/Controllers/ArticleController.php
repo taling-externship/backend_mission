@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class ArticleController extends Controller
 {
     /** is_show 가 true 인 데이터 목록을 출력하여 리턴한다. */
-    public function index(): Response
+    public function getArticles(): Response
     {
         $rows = Article::where('is_show', true)->get();
 
