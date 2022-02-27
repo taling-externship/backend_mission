@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Article\CreateRequest;
 use App\Models\Article;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -21,8 +22,8 @@ class ArticleController extends Controller
     {
         $fields = $request->validated();
         $article = Article::create([
-            'slug_id' => $fields['slug_id'],
-            'slug' => $fields['slug'],
+            'slug_id' => Str::uuid(),
+            'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($fields['slug']))),
             'url' => $fields['url'],
             'title' => $fields['title'],
             'content' => $fields['content'],
