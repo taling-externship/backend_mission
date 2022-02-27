@@ -15,7 +15,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'id'              => ['required'],
-            'url'             => ['required', 'string'],
             'title'           => ['required', 'string', 'max:255'],
             'content'         => ['required', 'string', 'min:10'],
             'is_show'         => ['required', 'boolean'],

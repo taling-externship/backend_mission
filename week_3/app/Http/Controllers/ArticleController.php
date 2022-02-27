@@ -26,7 +26,6 @@ class ArticleController extends Controller
         $article = Article::create([
             'slug_id' => Str::uuid(),
             'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($fields['title']))),
-            'url' => $fields['url'],
             'title' => $fields['title'],
             'content' => $fields['content'],
             'is_show' => true,
