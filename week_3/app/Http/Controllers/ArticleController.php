@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Article\CreateRequest;
+use App\Http\Requests\Article\UpdateRequest;
 use App\Models\Article;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -24,7 +25,7 @@ class ArticleController extends Controller
         $fields = $request->validated();
         $article = Article::create([
             'slug_id' => Str::uuid(),
-            'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($fields['slug']))),
+            'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($fields['title']))),
             'url' => $fields['url'],
             'title' => $fields['title'],
             'content' => $fields['content'],
@@ -46,12 +47,13 @@ class ArticleController extends Controller
     }
 
     /** 아티클 업데이트. */
-    public function update(Article $article): JsonResponse
+    public function update(UpdateRequest $article): JsonResponse
     {
-        $fields = Article::where('id', $article->id)->update([
-            'title' => $article->title,
-            'content' => $article->content,
-            'is_show' => $article->is_show,
+        $article = $article->validated();
+        $fields = Article::where('id', $article['id'])->update([
+            'title' => $article['title'],
+            'content' => $article['content'],
+            'is_show' => $article['is_show'],
         ]);
 
         if ($fields) {
