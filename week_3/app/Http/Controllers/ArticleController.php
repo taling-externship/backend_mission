@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Article\CreateRequest;
 use App\Models\Article;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
     /** is_show 가 true 인 데이터 목록을 출력하여 리턴한다. */
-    public function getArticles(): Response
+    public function getArticles(): JsonResponse
     {
         $rows = Article::where('is_show', true)->get();
 
@@ -18,7 +19,7 @@ class ArticleController extends Controller
     }
 
     /** Article 추가 */
-    public function addArticle(CreateRequest $request): Response
+    public function addArticle(CreateRequest $request)
     {
         $fields = $request->validated();
         $article = Article::create([
@@ -34,7 +35,7 @@ class ArticleController extends Controller
     }
 
     /** 1개의 아티클 보여줌. */
-    public function getArticle(string $slug_id, string $slug): Response
+    public function getArticle(string $slug_id, string $slug): JsonResource
     {
         $articles = Article::where('slug_id', $slug_id)->where('is_show', true)->orderBy('id', 'asc')->firstOrFail();
 
@@ -61,7 +62,7 @@ class ArticleController extends Controller
     }
 
     /** 아티클 삭제. */
-    public function delete(int $id): Response
+    public function delete(int $id): JsonResponse
     {
         $result = Article::where('id', $id)->delete();
 
