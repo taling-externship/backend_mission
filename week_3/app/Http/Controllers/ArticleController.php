@@ -44,8 +44,8 @@ class ArticleController extends Controller
         return response()->json(['data' => $articles, 'message' => 'show 데이터를 하나 전달함'], 200);
     }
 
-    /** store 메소드와 유사하며, 단 수정하는 것이다. */
-    public function update(Article $article /*, Article $article */): JsonResponse
+    /** 아티클 업데이트. */
+    public function update(Article $article): JsonResponse
     {
         $fields = Article::where('id', $article->id)->update([
             'title' => $article->title,
@@ -60,7 +60,7 @@ class ArticleController extends Controller
         return response()->json(['message' => '데이터 업데이트에 실패함'], 500);
     }
 
-    /** store 메소드와 유사하다. 데이터를 삭제 할것인가 상태를 is_show = false 로 할 것인가의 문제 */
+    /** 아티클 삭제. */
     public function delete(int $id): Response
     {
         $result = Article::where('id', $id)->delete();
