@@ -8,8 +8,8 @@ trait ApiResponseTrait
 {
     public function response(string $message, array $data = [], int $statusCode, bool $success = true): JsonResponse
     {
-        if ($message) {
-            return response()->json(['message', '메세지가 없습니다..', 422]);
+        if (!$message) {
+            return response()->json(['message', '메세지가 없습니다..', 203]);
         }
 
         return response()->json(['message' => $message, 'error' => !$success, 'code' => $statusCode, 'results' => $data], $statusCode);
