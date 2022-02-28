@@ -2,12 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Http\Request\Article\CreateRequest;
-use App\Http\Request\Article\UpdateRequest;
+use App\Http\Requests\Article\CreateRequest;
+use App\Http\Requests\Article\UpdateRequest;
 use App\Http\Traits\ApiResponseTrait as Response;
 use App\Interfaces\ArticleInterface;
 use App\Models\Article;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 
 class ArticleRepository implements ArticleInterface
@@ -44,7 +47,7 @@ class ArticleRepository implements ArticleInterface
     }
 
     /** 1개의 아티클 보여줌. */
-    public function getArticle(string $slug_id, string $slug)
+    public function getArticle(string $slug_id, string $slug): JsonResponse|Redirector|RedirectResponse|Application
     {
         try {
             $articles = Article::where('slug_id', $slug_id)->where('is_show', true)->orderBy('id', 'asc')->first();
@@ -63,10 +66,10 @@ class ArticleRepository implements ArticleInterface
     }
 
     /** 아티클 업데이트. */
-    public function updateArticle(UpdateRequest $article): JsonResponse
+    public function updateArticle(UpdateRequest $request): JsonResponse
     {
         try {
-            $article = $article->validated();
+            $article = $request->validated();
             Article::where('id', $article['id'])->update([
                 'title' => $article['title'],
                 'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($article['title']))),
