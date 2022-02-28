@@ -2,11 +2,12 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 
 trait ApiResponseTrait
 {
-    public function response(string $message, array $data = [], int $statusCode, bool $success = true): JsonResponse
+    public function response(string $message, Collection $data, int $statusCode, bool $success = true): JsonResponse
     {
         if (!$message) {
             return response()->json(['message', '메세지가 없습니다..', 203]);
@@ -15,7 +16,7 @@ trait ApiResponseTrait
         return response()->json(['message' => $message, 'error' => !$success, 'code' => $statusCode, 'results' => $data], $statusCode);
     }
 
-    public function success(string $message, array $data, int $statusCode = 200): JsonResponse
+    public function success(string $message, Collection $data, int $statusCode = 200): JsonResponse
     {
         return $this->response($message, $data, $statusCode);
     }
