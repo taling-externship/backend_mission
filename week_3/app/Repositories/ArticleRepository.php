@@ -42,7 +42,7 @@ class ArticleRepository implements ArticleInterface
                 'content' => $newArticle['content'],
                 'is_show' => true,
             ]);
-            return $this->success("아티클을 추가했다.", new ArticleCollection($newArticle), 200);
+            return $this->success("여러개의 아티클이 조회 되었습니다.", new ArticleResource($newArticle), 200);
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
@@ -61,7 +61,7 @@ class ArticleRepository implements ArticleInterface
             if (!$article) {
                 return $this->error("선택한 아티클이 존재하지 않습니다.", 404);
             }
-            return $this->success("선택한 아티클이 존재합니다.", new ArticleResource($article), '200');
+            return $this->success("하나의 아티클이 조회 되었습니다.", new ArticleResource($article), '200');
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
@@ -83,12 +83,10 @@ class ArticleRepository implements ArticleInterface
             if (!$article) {
                 return $this->error("선택한 아티클이 존재하지 않습니다.", 404);
             }
-            return $this->success("선택한 아티클이 존재합니다.", $article);
+            return $this->success("아티클이 업데이트 되었습니다..", new ArticleResource($article));
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
-
-        return response()->json(['data' => $article, 'message' => '데이터를 업데이트 함'], 200);
     }
 
     /** 아티클 삭제. */
@@ -97,10 +95,11 @@ class ArticleRepository implements ArticleInterface
         try {
             $article = Article::find($id);
             if (!$article) {
-                return $this->error("아티클을 삭제함", 404);
+                return $this->error("아티클을 삭제함", 203);
             }
-            $article->delete();
-            return $this->success('사용자 정보 삭제했음. ');
+            $article->is_show = false;
+            $article->save();
+            return $this->success('사용자 정보 삭제했음.');
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
