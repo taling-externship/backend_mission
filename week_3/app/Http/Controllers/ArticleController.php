@@ -4,69 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Article\CreateRequest;
 use App\Http\Requests\Article\UpdateRequest;
-use App\Models\Article;
+use App\Interfaces\ArticleInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
+    protected ArticleInterface $articleInterface;
+
+    public function __construct(ArticleInterface $articleInterface)
+    {
+        $this->articleInterface = $articleInterface;
+    }
+
     /** is_show 가 true 인 데이터 목록을 출력하여 리턴한다. */
     public function getArticles(): JsonResponse
     {
-        $rows = Article::where('is_show', true)->get();
 
-        return response()->json(['data' => $rows, 'message' => '공개중인 모든 데이터를 전달함'], 200);
+        return $this->articleInterface->getArticles();
     }
 
     /** Article 추가 */
     public function addArticle(CreateRequest $request)
     {
-        $fields = $request->validated();
-        $article = Article::create([
-            'slug_id' => Str::uuid(),
-            'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($fields['title']))),
-            'title' => $fields['title'],
-            'content' => $fields['content'],
-            'is_show' => true,
-        ]);
-
-        return response()->json(['data' => $article, 'message' => '추가한 테이터를 전달함'], 201);
+        return $this->articleInterface->addArticle($request);
     }
 
     /** 1개의 아티클 보여줌. */
     public function getArticle(string $slug_id, string $slug)
     {
-        $articles = Article::where('slug_id', $slug_id)->where('is_show', true)->orderBy('id', 'asc')->firstOrFail();
-
-        if ($articles->slug !== $slug) {
-            return redirect("/api/articles/$slug_id/$articles->slug");
-        }
-        return response()->json(['data' => $articles, 'message' => 'show 데이터를 하나 전달함'], 200);
+        return $this->articleInterface->getArticle($slug_id, $slug);
     }
 
     /** 아티클 업데이트. */
     public function update(UpdateRequest $article): JsonResponse
     {
-        $article = $article->validated();
-        Article::where('id', $article['id'])->update([
-            'title' => $article['title'],
-            'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($article['title']))),
-            'content' => $article['content'],
-            'is_show' => $article['is_show'],
-        ]);
-        $article = Article::findOrFail($article['id']);
-        return response()->json(['data' => $article, 'message' => '데이터를 업데이트 함'], 200);
+        return $this->articleInterface->updateArticle($article);
     }
 
     /** 아티클 삭제. */
     public function delete(int $id): JsonResponse
     {
-        $result = Article::where('id', $id)->delete();
-
-        if ($result) {
-            return response()->json(['data' => $result, 'message' => '데이터 삭제에 성공함'], 200);
-        }
-
-        return response()->json(['message' => 'a 데이터 삭제에 실패함'], 400);
+        return $this->articleInterface->deleteArticle($id);
     }
 }
