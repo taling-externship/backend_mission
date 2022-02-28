@@ -9,10 +9,7 @@ use App\Http\Resources\ArticleResource;
 use App\Http\Traits\ApiResponseTrait as Response;
 use App\Interfaces\ArticleInterface;
 use App\Models\Article;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 
 class ArticleRepository implements ArticleInterface
