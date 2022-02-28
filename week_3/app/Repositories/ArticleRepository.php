@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Http\Requests\Article\CreateRequest;
 use App\Http\Requests\Article\UpdateRequest;
+use App\Http\Resources\ArticleCollection;
+use App\Http\Resources\ArticleResource;
 use App\Http\Traits\ApiResponseTrait as Response;
 use App\Interfaces\ArticleInterface;
 use App\Models\Article;
@@ -22,7 +24,7 @@ class ArticleRepository implements ArticleInterface
     {
         try {
             $articles = Article::where('is_show', true)->get();
-            return $this->success('모든 게시글', $articles);
+            return $this->success('모든 게시글', new ArticleCollection($articles));
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
@@ -40,26 +42,26 @@ class ArticleRepository implements ArticleInterface
                 'content' => $newArticle['content'],
                 'is_show' => true,
             ]);
-            return $this->success("아티클을 추가했다.", $newArticle, 200);
+            return $this->success("아티클을 추가했다.", new ArticleCollection($newArticle), 200);
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
     }
 
     /** 1개의 아티클 보여줌. */
-    public function getArticle(string $slug_id, string $slug): JsonResponse|Redirector|RedirectResponse|Application
+    public function getArticle(string $slug_id, string $slug)
     {
         try {
-            $articles = Article::where('slug_id', $slug_id)->where('is_show', true)->orderBy('id', 'asc')->first();
+            $article = Article::where('slug_id', $slug_id)->where('is_show', true)->first();
 
-            if ($articles->slug !== $slug) {
-                return redirect("/api/articles/$slug_id/$articles->slug");
+            if ($article->slug !== $slug) {
+                return redirect("/api/articles/$slug_id/$article->slug");
             }
 
-            if (!$articles) {
+            if (!$article) {
                 return $this->error("선택한 아티클이 존재하지 않습니다.", 404);
             }
-            return $this->success("선택한 아티클이 존재합니다.", $articles);
+            return $this->success("선택한 아티클이 존재합니다.", new ArticleResource($article), '200');
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
