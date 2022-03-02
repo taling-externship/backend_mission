@@ -14,8 +14,8 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Interfaces\ArticleInterface',
-            'App\Repositories\ArticleRepository'
+            'App\Repositories\Article\ArticleInterface',
+            'App\Repositories\Article\ArticleRepository'
         );
     }
 

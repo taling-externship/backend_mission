@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Repositories\Article;
 
 use App\Http\Requests\Article\CreateRequest;
 use App\Http\Requests\Article\UpdateRequest;

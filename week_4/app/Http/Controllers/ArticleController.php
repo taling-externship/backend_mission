@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Article\CreateRequest;
 use App\Http\Requests\Article\UpdateRequest;
-use App\Interfaces\ArticleInterface;
+use App\Repositories\Article\ArticleInterface;
 use Illuminate\Http\JsonResponse;
 
 class ArticleController extends Controller
