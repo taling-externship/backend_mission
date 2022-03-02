@@ -24,7 +24,7 @@ class ArticleRepository
 
     public function getOneById(int $id): Article
     {
-        return $this->model->with('tags')->where('id', $id)->first();
+        return $this->model->with(['tags', 'attachment'])->where('id', $id)->first();
     }
 
     public function store(array $params): Article
@@ -88,6 +88,8 @@ class ArticleRepository
             'original_name' => $file->getClientOriginalName(),
             'stored_name' => "{$file_path}/{$file_name}",
             'article_id' => $article->id,
+            'extension' => $file->getClientOriginalExtension(),
+            'size' => $file->getSize(),
         ]);
 
         $attachment->makeHidden(['created_at', 'updated_at', 'stored_name', 'article_id']);

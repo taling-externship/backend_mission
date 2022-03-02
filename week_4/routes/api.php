@@ -26,3 +26,5 @@ Route::resource('/v1/article', 'App\Http\Controllers\ArticleController')
 
 Route::resource('/v1/article/{article}/love', 'App\Http\Controllers\LoveController')
     ->middleware('auth:sanctum')->only(['store', 'destroy']);
+
+require __DIR__ . '/attachment.php';

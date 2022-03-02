@@ -2,13 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\Models\Attachment;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ArticleCreateTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     protected function setUp(): void
     {
@@ -59,6 +64,7 @@ class ArticleCreateTest extends TestCase
             ->assertRedirect('login');
     }
 
+    /** @test */
     public function test_success_store_with_tag()
     {
         $this->assertDatabaseMissing('tags', [
@@ -74,5 +80,31 @@ class ArticleCreateTest extends TestCase
         $this->assertDatabaseHas('tags', [
             'name' => 'test',
         ]);
+    }
+
+    /** @test */
+    public function test_success_store_with_attachment()
+    {
+        Storage::fake('local');
+
+        $this->assertDatabaseMissing('attachments', [
+            'name' => 'test',
+        ]);
+
+        $file = UploadedFile::fake()->image('test.png', 300, 300);
+
+        $this->actingAs($this->signable)->post('/article', [
+            'title' => 'test',
+            'body' => 'hello',
+            'attachment' =>  $file,
+        ]);
+
+        $this->assertDatabaseHas('attachments', [
+            'original_name' => 'test.png',
+        ]);
+
+        $stored = Attachment::where('article_id', 1)->first()->stored_name;
+
+        Storage::disk('local')->assertExists('/attachment' . $stored);
     }
 }

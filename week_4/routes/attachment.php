@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/attachment', 'App\\Http\\Controllers\\AttachmentController');
+Route::get('/attachment/article/{article}/attachment/{attachment}/{name}', 'App\\Http\\Controllers\\AttachmentController');

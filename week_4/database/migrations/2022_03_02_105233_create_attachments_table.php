@@ -18,6 +18,8 @@ class CreateAttachmentsTable extends Migration
             $table->string('original_name');
             $table->string('stored_name');
             $table->foreignId('article_id')->constrained('articles', 'id')->cascadeOnDelete();
+            $table->string('extension', 5);
+            $table->integer('size');
             $table->timestamps();
         });
     }
