@@ -6,7 +6,6 @@ use App\Models\Tag;
 use App\Models\Article;
 use Illuminate\Http\File;
 use App\Models\Attachment;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\LengthAwarePaginator;
