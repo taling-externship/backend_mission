@@ -4,10 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Tag;
 use App\Models\Article;
+use Illuminate\Http\File;
 use App\Models\Attachment;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleRepository
 {
@@ -27,25 +29,11 @@ class ArticleRepository
 
     public function store(array $params): Article
     {
-        $article = $this->model->create([
+        return $this->model->create([
             'title' => $params['title'],
             'body' => $params['body'],
             'user_id' => Auth::id(),
         ]);
-
-        if (isset($params['tags'])) {
-            foreach ($params['tags'] as $tag) {
-                if (!$tag) continue;
-                $createdTag = Tag::firstOrCreate([
-                    'name' => $tag,
-                ]);
-                $tags[] = $createdTag->id;
-            }
-
-            $article->tags()->syncWithoutDetaching($tags);
-        }
-
-        return $this->model->with('tags')->where('id', $article->id)->first();
     }
 
     public function updateOneByArticle(Article $article, array $params): Article
@@ -55,19 +43,7 @@ class ArticleRepository
             'body' => $params['body'],
         ]);
 
-        if (isset($params['tags'])) {
-            foreach ($params['tags'] as $tag) {
-                if (!$tag) continue;
-                $createdTag = Tag::firstOrCreate([
-                    'name' => $tag,
-                ]);
-                $tags[] = $createdTag->id;
-            }
-
-            $article->tags()->sync($tags);
-        }
-
-        return $this->model->with('tags:id,name')->where('id', $article->id)->first();
+        return $article;
     }
 
     public function destroyOneByArticle(Article $article): bool
@@ -75,15 +51,42 @@ class ArticleRepository
         return $article->delete();
     }
 
+
+    public function tagging(Article $article, array $tags): Article
+    {
+        foreach ($tags as $tag) {
+            if (!$tag) continue;
+            $createdTag = Tag::firstOrCreate([
+                'name' => $tag,
+            ]);
+
+            $article->tags[] = $createdTag->makeHidden(['created_at', 'updated_at']);
+            $tag_ids[] = $createdTag->id;
+        }
+
+        $article->tags()->sync($tag_ids);
+
+        return $article;
+    }
+
     /**
+     * @param \App\Models\Article $article 원글
      * @param \Illuminate\Http\UploadedFile $file 첨부파일
+     * @param string $store_name 저장path + name
      * @return \App\Models\Article Article에 with attachment 추가
      */
-    public function attach(Article $article, UploadedFile $file, string $store_name): Article
+    public function attach(Article $article): Article
     {
+        $file = request()->file('attachment');
+
+        $file_path = '/' . date('Ym') . '/' . $article->id;
+        $file_name = Auth::id() . date('dHis') . '.' . $file->getClientOriginalExtension();
+
+        Storage::putFileAs('attachment' . $file_path, new File($file->getPathname()), $file_name);
+
         $attachment = Attachment::create([
             'original_name' => $file->getClientOriginalName(),
-            'stored_name' => $store_name,
+            'stored_name' => "{$file_path}/{$file_name}",
             'article_id' => $article->id,
         ]);
 

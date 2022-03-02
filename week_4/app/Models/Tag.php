@@ -12,6 +12,8 @@ class Tag extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ['pivot'];
+
     public function articles()
     {
         return $this->belongsToMany('App\\Models\\Article', 'articles_tags',);

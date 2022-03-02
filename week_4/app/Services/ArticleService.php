@@ -39,6 +39,14 @@ class ArticleService extends AbstractArticleService
 
         $article = $this->repository->store($params);
 
+        if (isset($params['tags'])) {
+            $article = $this->repository->tagging($article, $params['tags']);
+        }
+
+        if (isset($params['attachment'])) {
+            $article = $this->repository->attach($article);
+        }
+
         return redirect()->route('article.show', $article)->with('success', 'Your Article is created well');
     }
 
@@ -64,6 +72,14 @@ class ArticleService extends AbstractArticleService
     public function update(array $params, Article $article): RedirectResponse
     {
         $article = $this->repository->updateOneByArticle($article, $params);
+
+        if (isset($params['tags'])) {
+            $article = $this->repository->tagging($article, $params['tags']);
+        }
+
+        if (isset($params['attachment'])) {
+            $article = $this->repository->attach($article);
+        }
 
         return redirect()->route('article.show', $article)->with('success', 'Your Article is updated well');
     }

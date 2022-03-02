@@ -19,13 +19,6 @@ class Article extends Model
         return $this->belongsToMany('App\\Models\\Tag', 'articles_tags',);
     }
 
-    public function toSearchableArray()
-    {
-        $array = $this->toArray();
-        $array['tags'] = $this->tags->toArray();
-        return $array;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -52,5 +45,12 @@ class Article extends Model
             'user_id' => auth()->user()->id,
             'article_id' => $this->id,
         ])->first() : false;
+    }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        $array['tags'] = $this->tags->toArray();
+        return $array;
     }
 }
