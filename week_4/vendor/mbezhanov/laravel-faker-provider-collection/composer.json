@@ -1,0 +1,29 @@
+{
+    "name": "mbezhanov/laravel-faker-provider-collection",
+    "description": "A collection of custom Faker providers for your Laravel applications",
+    "keywords": ["faker", "laravel"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marin Bezhanov",
+            "email": "marin.bezhanov@gmail.com"
+        }
+    ],
+    "require": {
+        "mbezhanov/faker-provider-collection": "^2.0",
+        "illuminate/support": "^5.1|^6.0|^7.0|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bezhanov\\Faker\\Laravel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bezhanov\\Faker\\Laravel\\FakerServiceProvider"
+            ]
+        }
+    }
+}
