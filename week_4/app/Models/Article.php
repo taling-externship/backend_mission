@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $slug Slug
  * @property string $title 제목
  * @property string $content 내용
+ * @property string $thumbnail 이미지 썸네일
  * @property int $is_show 공개 여부
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -49,6 +50,7 @@ class Article extends Model
         'slug',
         'title',
         'content',
+        'thumbnail',
         'is_show',
         'created_at',
         'updated_at',

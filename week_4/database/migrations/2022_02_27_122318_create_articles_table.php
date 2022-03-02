@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->comment('Slug');
             $table->string('title')->comment('제목');
             $table->text('content')->comment('내용');
+            $table->string('thumbnail')->comment('이미지 썸네일');
             $table->boolean('is_show')->default(1)->comment('공개 여부');
             $table->timestamps();
         });

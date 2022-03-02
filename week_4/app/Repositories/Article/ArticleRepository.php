@@ -6,6 +6,7 @@ use App\Http\Requests\Article\CreateRequest;
 use App\Http\Requests\Article\UpdateRequest;
 use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
+use App\Http\Traits\UploadTrait;
 use App\Models\Article;
 use App\Repositories\ImageFileRepository;
 use App\Repositories\PDO;
@@ -15,6 +16,7 @@ use function redirect;
 
 class ArticleRepository implements ArticleInterface
 {
+    use UploadTrait;
 
     private PDO $connection;
     private ImageFileRepository $images;
@@ -40,13 +42,20 @@ class ArticleRepository implements ArticleInterface
     {
         try {
             $newArticle = $request->validated();
-            $newArticle = Article::create([
-                'slug_id' => Str::uuid(),
-                'slug' => strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($newArticle['title']))),
-                'title' => $newArticle['title'],
-                'content' => $newArticle['content'],
-                'is_show' => true,
-            ]);
+            $article = new Article();
+            $article->slug_id  = Str::uuid();
+            $article->slug  =strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($newArticle['title'])));
+            $article->title  = $newArticle['title'];
+            $article->content = $newArticle['content'];
+            if ($request->has('image')) {
+                $image = $request->file('image');
+                $name = Str::slug($request->input('name')).'_'.time();
+                $folder = '/upload/images/';
+                $filePath = $folder.$name.'.'.$image->getClientOriginalExtension();
+                $this->uploadFile($image, $folder, 'public', $name);
+                $article->thumbnail = $filePath;
+            }
+            $article->save();
             return $this->success("여러개의 아티클이 조회 되었습니다.", new ArticleResource($newArticle), 200);
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
