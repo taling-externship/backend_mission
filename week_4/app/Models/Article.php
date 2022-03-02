@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Attachment;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,6 +39,11 @@ class Article extends Model
     public function love()
     {
         return $this->hasMany(Love::class);
+    }
+
+    public function attachment()
+    {
+        return $this->hasMany(Attachment::class);
     }
 
     public function getMyLovedAttribute()

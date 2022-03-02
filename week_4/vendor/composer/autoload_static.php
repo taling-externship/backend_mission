@@ -694,6 +694,7 @@ class ComposerStaticInit8674e7aa3dc1ffe8e4f0405211b5c749
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Providers\\TelescopeServiceProvider' => __DIR__ . '/../..' . '/app/Providers/TelescopeServiceProvider.php',
         'App\\Repositories\\ArticleRepository' => __DIR__ . '/../..' . '/app/Repositories/ArticleRepository.php',
         'App\\Repositories\\LoveRepository' => __DIR__ . '/../..' . '/app/Repositories/LoveRepository.php',
         'App\\Services\\ApiArticleService' => __DIR__ . '/../..' . '/app/Services/ApiArticleService.php',
