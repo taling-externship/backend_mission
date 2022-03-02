@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use App\Models\Article;
+use Illuminate\Http\File;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Repositories\ArticleRepository;
+use Illuminate\Support\Facades\Storage;
 use App\Contracts\AbstractArticleService;
 
 class ApiArticleService extends AbstractArticleService
@@ -29,6 +32,17 @@ class ApiArticleService extends AbstractArticleService
         }
 
         $article = $this->repository->store($params);
+
+        if (isset($params['attachment'])) {
+            $file = request()->file('attachment');
+
+            $file_path = '/' . date('Ym') . '/' . $article->id;
+            $file_name = Auth::id() . date('dHis') . '.' . $file->getClientOriginalExtension();
+
+            Storage::putFileAs('attachment' . $file_path, new File($file->getPathname()), $file_name);
+
+            $article = $this->repository->attach($article, $file, $file_path . $file_name);
+        }
 
         return response()->json($article->toArray());
     }

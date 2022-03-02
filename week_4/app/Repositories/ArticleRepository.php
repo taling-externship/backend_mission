@@ -4,8 +4,10 @@ namespace App\Repositories;
 
 use App\Models\Tag;
 use App\Models\Article;
+use App\Models\Attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
 
 class ArticleRepository
 {
@@ -32,14 +34,12 @@ class ArticleRepository
         ]);
 
         if (isset($params['tags'])) {
-            $tags = [];
-
             foreach ($params['tags'] as $tag) {
                 if (!$tag) continue;
                 $createdTag = Tag::firstOrCreate([
                     'name' => $tag,
                 ]);
-                array_push($tags, $createdTag->id);
+                $tags[] = $createdTag->id;
             }
 
             $article->tags()->syncWithoutDetaching($tags);
@@ -56,14 +56,12 @@ class ArticleRepository
         ]);
 
         if (isset($params['tags'])) {
-            $tags = [];
-
             foreach ($params['tags'] as $tag) {
                 if (!$tag) continue;
                 $createdTag = Tag::firstOrCreate([
                     'name' => $tag,
                 ]);
-                array_push($tags, $createdTag->id);
+                $tags[] = $createdTag->id;
             }
 
             $article->tags()->sync($tags);
@@ -75,5 +73,23 @@ class ArticleRepository
     public function destroyOneByArticle(Article $article): bool
     {
         return $article->delete();
+    }
+
+    /**
+     * @param \Illuminate\Http\UploadedFile $file 첨부파일
+     * @return \App\Models\Article Article에 with attachment 추가
+     */
+    public function attach(Article $article, UploadedFile $file, string $store_name): Article
+    {
+        $attachment = Attachment::create([
+            'original_name' => $file->getClientOriginalName(),
+            'stored_name' => $store_name,
+            'article_id' => $article->id,
+        ]);
+
+        $attachment->makeHidden(['created_at', 'updated_at', 'stored_name', 'article_id']);
+        $article->attachment = $attachment;
+
+        return $article;
     }
 }
