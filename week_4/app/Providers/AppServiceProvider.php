@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->app->environment('local')) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
+        }
+
         app()->bind(AbstractArticleService::class, function () {
             if (request()->expectsJson()) {
                 return new ApiArticleService(new ArticleRepository(new Article()));

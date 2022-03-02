@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9e92d397cbea26f5162995bd81206015bf80de0b',
+        'reference' => '5d04cf2ee3a3f4a8e41c4172264770002b739014',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -499,7 +499,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9e92d397cbea26f5162995bd81206015bf80de0b',
+            'reference' => '5d04cf2ee3a3f4a8e41c4172264770002b739014',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -537,6 +537,15 @@
             'aliases' => array(),
             'reference' => '65c9faf50d567b65d81764a44526545689e3fe63',
             'dev_requirement' => false,
+        ),
+        'laravel/telescope' => array(
+            'pretty_version' => 'v4.7.3',
+            'version' => '4.7.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/telescope',
+            'aliases' => array(),
+            'reference' => 'f91e7d068d3754575388b990332d0aad8d7ac7d1',
+            'dev_requirement' => true,
         ),
         'laravel/tinker' => array(
             'pretty_version' => 'v2.7.0',
