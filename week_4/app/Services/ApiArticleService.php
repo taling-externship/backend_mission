@@ -33,14 +33,6 @@ class ApiArticleService extends AbstractArticleService
 
         $article = $this->repository->store($params);
 
-        if (isset($params['tags'])) {
-            $article = $this->repository->tagging($article, $params['tags']);
-        }
-
-        if (isset($params['attachment'])) {
-            $article = $this->repository->attach($article);
-        }
-
         return response()->json($article->toArray());
     }
 
@@ -60,16 +52,8 @@ class ApiArticleService extends AbstractArticleService
 
         $article = $this->repository->updateOneByArticle($article, $params);
 
-        if (isset($params['tags'])) {
-            $article = $this->repository->tagging($article, $params['tags']);
-        }
-
-        if (isset($params['attachment'])) {
-            $article = $this->repository->attach($article);
-        }
-
         return response()->json([
-            'result' => 'success',
+            'result' => $article,
         ]);
     }
 

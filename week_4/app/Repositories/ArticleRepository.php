@@ -6,9 +6,11 @@ use App\Models\Tag;
 use App\Models\Article;
 use Illuminate\Http\File;
 use App\Models\Attachment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Throwable;
 
 class ArticleRepository
 {
@@ -26,23 +28,61 @@ class ArticleRepository
         return $this->model->with(['tags', 'attachment'])->where('id', $id)->first();
     }
 
-    public function store(array $params): Article
+    public function store(array $params): Article | Throwable
     {
-        return $this->model->create([
-            'title' => $params['title'],
-            'body' => $params['body'],
-            'user_id' => Auth::id(),
-        ]);
+        try {
+            DB::beginTransaction();
+
+            $article =  $this->model->create([
+                'title' => $params['title'],
+                'body' => $params['body'],
+                'user_id' => Auth::id(),
+            ]);
+
+            if (isset($params['tags'])) {
+                $article = $this->tagging($article, $params['tags']);
+            }
+
+            if (isset($params['attachment'])) {
+                $article = $this->attach($article);
+            }
+
+            DB::commit();
+
+            return $article;
+        } catch (Throwable $e) {
+            DB::rollback();
+
+            return $e;
+        }
     }
 
-    public function updateOneByArticle(Article $article, array $params): Article
+    public function updateOneByArticle(Article $article, array $params): Article | Throwable
     {
-        $article->update([
-            'title' => $params['title'],
-            'body' => $params['body'],
-        ]);
+        try {
+            DB::beginTransaction();
 
-        return $article;
+            $article->update([
+                'title' => $params['title'],
+                'body' => $params['body'],
+            ]);
+
+            if (isset($params['tags'])) {
+                $article = $this->tagging($article, $params['tags']);
+            }
+
+            if (isset($params['attachment'])) {
+                $article = $this->attach($article);
+            }
+
+            DB::commit();
+
+            return $article;
+        } catch (Throwable $e) {
+            DB::rollback();
+
+            return $e;
+        }
     }
 
     public function destroyOneByArticle(Article $article): bool
