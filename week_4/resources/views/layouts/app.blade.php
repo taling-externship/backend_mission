@@ -53,7 +53,7 @@
             const search = instantsearch({
                 indexName: "articles",
                 searchClient: instantMeiliSearch(
-                    "{{ config('app.meilisearch.host') }}"
+                    "{{ config('scout.meilisearch.host') }}"
                 )
             });
 
