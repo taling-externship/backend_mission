@@ -3,7 +3,7 @@
         <h2 class="text-2xl my-4"> {{ $article->title }} </h2>
         <article>
             @if (isset($article->attachment[0]))
-                <img src="/attachment/article/{{ $article->id }}/attachment/{{ $article->attachment[0]->id }}/{{ $article->attachment[0]->original_name }}"
+                <img src="/attachment/{{ $article->attachment[0]->id }}/{{ $article->attachment[0]->original_name }}"
                     alt="{{ $article->title }} attachment" />
             @endif
             {{ $article->body }}
