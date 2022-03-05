@@ -74,7 +74,7 @@
                             <div>
                             <div class="hit-name">
                                 <a href="/article/@{{ id }}">
-                                    @{{ #helpers.highlight }}{ "attribute": "title" }@{{ /helpers.highlight }}
+                                    @{{#helpers.highlight}}{ "attribute": "title" }@{{/helpers.highlight}}
                                     <small class="text-xs">@{{ created_at }}</small>
                                 </a>
                             </div>
