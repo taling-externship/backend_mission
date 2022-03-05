@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -11,10 +12,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ config('app.env') === 'local' ? asset('css/app.css') : secure_asset('css/app.css') }}">
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ config('app.env') === 'local' ? asset('js/app.js') : secure_asset('js/app.js') }}" defer></script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
