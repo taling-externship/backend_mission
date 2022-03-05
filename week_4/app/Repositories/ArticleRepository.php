@@ -28,7 +28,7 @@ class ArticleRepository
         return $this->model->with(['tags', 'attachment'])->where('id', $id)->first();
     }
 
-    public function store(array $params): Article | Throwable
+    public function store(array $params): Article
     {
         try {
             DB::beginTransaction();
@@ -53,11 +53,11 @@ class ArticleRepository
         } catch (Throwable $e) {
             DB::rollback();
 
-            return $e;
+            throw $e;
         }
     }
 
-    public function updateOneByArticle(Article $article, array $params): Article | Throwable
+    public function updateOneByArticle(Article $article, array $params): Article
     {
         try {
             DB::beginTransaction();
@@ -81,7 +81,7 @@ class ArticleRepository
         } catch (Throwable $e) {
             DB::rollback();
 
-            return $e;
+            throw $e;
         }
     }
 
