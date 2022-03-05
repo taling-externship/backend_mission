@@ -3,12 +3,9 @@
 namespace App\Services;
 
 use App\Models\Article;
-use Illuminate\Http\File;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Repositories\ArticleRepository;
-use Illuminate\Support\Facades\Storage;
 use App\Contracts\AbstractArticleService;
 
 class ApiArticleService extends AbstractArticleService
