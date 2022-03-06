@@ -110,8 +110,6 @@ class ArticleRepository
 
     /**
      * @param \App\Models\Article $article 원글
-     * @param \Illuminate\Http\UploadedFile $file 첨부파일
-     * @param string $store_name 저장path + name
      * @return \App\Models\Article Article에 with attachment 추가
      */
     public function attach(Article $article): Article
