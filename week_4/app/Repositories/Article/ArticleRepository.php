@@ -11,7 +11,10 @@ use App\Http\Traits\ApiResponseTrait;
 use App\Models\Article;
 use App\Repositories\ImageFileRepository;
 use App\Repositories\PDO;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 use function redirect;
 
@@ -63,7 +66,7 @@ class ArticleRepository implements ArticleInterface
     }
 
     /** 1개의 아티클 보여줌. */
-    public function getArticle(string $slug_id, string $slug)
+    public function getArticle(string $slug_id, string $slug): JsonResponse|Redirector|RedirectResponse|Application
     {
         try {
             $article = Article::where('slug_id', $slug_id)->where('is_show', true)->first();
