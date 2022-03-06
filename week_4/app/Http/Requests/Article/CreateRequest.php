@@ -13,6 +13,7 @@ class CreateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string', 'min:10'],
+            'thumbnail' => ['required', 'image', 'max:2048'],
         ];
     }
 

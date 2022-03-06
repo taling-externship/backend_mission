@@ -7,6 +7,7 @@ use App\Http\Requests\Article\UpdateRequest;
 use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
 use App\Http\Traits\UploadTrait;
+use App\Http\Traits\ApiResponseTrait;
 use App\Models\Article;
 use App\Repositories\ImageFileRepository;
 use App\Repositories\PDO;
@@ -17,14 +18,13 @@ use function redirect;
 class ArticleRepository implements ArticleInterface
 {
     use UploadTrait;
+    use ApiResponseTrait;
 
-    private PDO $connection;
-    private ImageFileRepository $images;
+    // private ImageFileRepository $images;
 
-    public function __construct(PDO $connection, ImageFileRepository $imageFile) {
-        $this->connection = $connection;
-        $this->images = $imageFile;
-    }
+    // public function __construct(ImageFileRepository $imageFile) {
+    //     $this->images = $imageFile;
+    // }
 
     /** is_show 가 true 인 데이터 목록을 출력하여 리턴한다. */
     public function getArticles(): JsonResponse
@@ -47,16 +47,16 @@ class ArticleRepository implements ArticleInterface
             $article->slug  =strtolower(preg_replace('/[^a-zA-Z가-힣0-9]+/', '-', trim($newArticle['title'])));
             $article->title  = $newArticle['title'];
             $article->content = $newArticle['content'];
-            if ($request->has('image')) {
-                $image = $request->file('image');
-                $name = Str::slug($request->input('name')).'_'.time();
-                $folder = '/upload/images/';
-                $filePath = $folder.$name.'.'.$image->getClientOriginalExtension();
-                $this->uploadFile($image, $folder, 'public', $name);
-                $article->thumbnail = $filePath;
-            }
+            // 이미지는 필수
+            $image = $request->file('thumbnail');
+            $name = Str::slug($request->input('name')).'_'.time();
+            $folder = '/upload/images/';
+            $filePath = $folder.$name.'.'.$image->getClientOriginalExtension();
+            $this->uploadFile($image, $folder, 'public', $name);
+            $article->thumbnail = $filePath;
+            // 이미지 업로드 종료
             $article->save();
-            return $this->success("여러개의 아티클이 조회 되었습니다.", new ArticleResource($newArticle), 200);
+            return $this->success("여러개의 아티클이 조회 되었습니다.", new ArticleResource($article), 200);
         } catch (\Exception $err) {
             return $this->error($err->getMessage(), $err->getCode());
         }
