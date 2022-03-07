@@ -1,0 +1,4 @@
+node_modules
+vender
+Dockerfile
+docker-compose.yml
