@@ -4,10 +4,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('article.index') }}" class="flex">
+                <div class="shrink-0 flex">
+                    <a href="{{ route('article.index') }}" class="flex items-center">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600 items-center" />
-                        <h1>LARAVEL APP!!!</h1>
+                        <h1>LARAVEL APP</h1>
                     </a>
                 </div>
 
