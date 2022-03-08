@@ -6,8 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('article.index') }}" class="flex">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
-                        <h1>LARAVEL APP!</h1>
+                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600 items-center" />
+                        <h1>LARAVEL APP!!!</h1>
                     </a>
                 </div>
 
