@@ -41,3 +41,5 @@ npx tailwindcss init --full
 -   HTTP API 로 일단 만들고, 공부를 좀 더 해봅시다.
     http://slides.com/eungjun/rest#/1
     https://www.iana.org/form/media-types
+
+## 5주차... 뭐 하지?
