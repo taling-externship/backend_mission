@@ -43,4 +43,4 @@ npx tailwindcss init --full
     https://www.iana.org/form/media-types
 
 ## 5주차... 뭐 하지?
-- jenkins test2
+- jenkins test3
