@@ -13,6 +13,9 @@ class ArticleController extends Controller
 {
     public function __construct(private AbstractArticleService $service)
     {
+        if (request()->expectsJson()) {
+            $this->middleware('auth:sanctum')->only(['store', 'update', 'destroy']);
+        }
     }
     /**
      * Display a listing of the resource.

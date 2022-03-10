@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller('App\\Http\\Controllers\\Auth\\ApiAuthController')->group(function () {
-    Route::post('/v1/register', 'store');
-    Route::post('/v1/login', 'login');
-});
+Route::resource('/article', 'App\Http\Controllers\ArticleController')
+    ->except(['create', 'edit']);
 
-Route::resource('/v1/article', 'App\Http\Controllers\ArticleController')
-    ->only(['index', 'show']);
-
-Route::resource('/v1/article', 'App\Http\Controllers\ArticleController')
-    ->middleware('auth:sanctum')->only(['store', 'update', 'destroy']);
-
-Route::resource('/v1/article/{article}/love', 'App\Http\Controllers\LoveController')
+Route::resource('/article/{article}/love', 'App\Http\Controllers\LoveController')
     ->middleware('auth:sanctum')->only(['store', 'destroy']);
 
+require __DIR__ . '/auth.php';
+
+Route::controller('App\\Http\\Controllers\\Auth\\ApiAuthController')->group(function () {
+    Route::post('/register', 'store');
+    Route::post('/login', 'login');
+});
+
 require __DIR__ . '/attachment.php';
+

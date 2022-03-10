@@ -15,6 +15,8 @@ class ApiAuthService
             'password' => Hash::make($params['password']),
         ]);
 
+        $user->sendEmailVerificationNotification();
+
         return response()->json([
             ...$user->toArray(),
             'access_token' => $user->createToken('auth_token')->plainTextToken,
