@@ -10,10 +10,12 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^8.75",
+        "laravel/horizon": "^5.9",
         "laravel/sanctum": "^2.11",
         "laravel/scout": "^9.4",
         "laravel/tinker": "^2.5",
-        "meilisearch/meilisearch-php": "^0.21.0"
+        "meilisearch/meilisearch-php": "^0.21.0",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

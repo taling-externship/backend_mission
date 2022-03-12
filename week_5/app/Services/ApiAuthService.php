@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\Auth\Email\VerificationNotificationJob;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +16,7 @@ class ApiAuthService
             'password' => Hash::make($params['password']),
         ]);
 
-        $user->sendEmailVerificationNotification();
+        VerificationNotificationJob::dispatch($user);
 
         return response()->json([
             ...$user->toArray(),
