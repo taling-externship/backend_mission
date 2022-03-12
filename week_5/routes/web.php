@@ -22,3 +22,5 @@ Route::resource('/article/{article}/love', 'App\Http\Controllers\LoveController'
 require __DIR__ . '/auth.php';
 
 require __DIR__ . '/attachment.php';
+
+Route::get('/info', fn() => phpinfo());
