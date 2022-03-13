@@ -30,17 +30,18 @@ class AuthSandMailCron extends Command
         $mailLists = AuthMailList::where('is_send', false)->get();
         foreach ($mailLists as $mailList) {
             \Log::info($mailList->getUser);
+            \Log::info($mailList->getUser->getRememberToken());
             $data = array(
                 'to_email' => $mailList->getUser->email,
                 'to_name' => $mailList->getUser->name,
                 'from_email' => env('MAIL_FROM_ADDRESS', 'help@kspark.link'),
                 'from_name' => env('MAIL_FROM_NAME', 'Kyungseo-Park'),
                 'title' => $mailList->type,
-                'content' => $mailList->getUser->remember_token,
+                'content' => $mailList->getUser->getRememberToken(),
             );
 
             try {
-                Mail::send(new AuthSandMailable($data));
+                Mail::to($mailList->getUser->email)->send(new AuthSandMailable($data));
                 DB::beginTransaction();
                 AuthMailList::where('id', $mailList->id)->update(['is_send' => true]);
                 User::where('id', $mailList->user_id)->update(['is_valid' => true]);

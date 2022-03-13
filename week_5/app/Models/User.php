@@ -71,6 +71,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function getRememberToken(): ?string
+    {
+        return $this->remember_token;
+    }
+
     /**
      * The attributes that should be cast.
      *
