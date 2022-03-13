@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -41,6 +42,7 @@ class AuthController extends BaseController
             'user' => new UserResource($user),
         ];
 
+        event(new UserRegistered($user));
         return $this->sendResponse($response);
     }
 }
