@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Auth\LoginUserController;
 use App\Http\Controllers\API\Auth\PassportController;
 use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,9 @@ Route::get('articles/{slug_id}/{slug}', [ArticleController::class, 'getArticle']
 // JWT 로그인
 Route::prefix('auth')->group(function () {
     Route::post('register', [PassportController::class, 'register']);
-    Route::post('login', [PassportController::class, 'login']);
+    Route::post('login', [PassportController::class, 'login'])->name('login');
+
+    // 로그인한 사용자만 볼 수 있음.
     Route::middleware('auth:api')->group(function () {
         Route::get('get-user', [PassportController::class, 'userInfo']);
     });
