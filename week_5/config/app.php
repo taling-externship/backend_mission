@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,     // 레파지토리 프로바이더 추가
+        Laravel\Passport\PassportServiceProvider::class,    // laravel/passport 추가
 
     ],
 
