@@ -50,14 +50,13 @@ class PassportController extends Controller
     public function verify($token)
     {
         $user = User::where('remember_token', $token)->first();
+        if (!$user) {
+            return $this->error('토큰이 유효하지 않다.', 401);
+        }
         $user->is_valid = true;
         $user->remember_token = Str::random('100');
         $user->save();
 
-        if ($user) {
-            return $this->success('회원 인증에 성공 했다. 나머지는 프론트가..', new UserResource($user));
-        }
-
-        return $this->error('토큰이 유효하지 않다.', 401);
+        return $this->success('회원 인증에 성공 했다. 나머지는 프론트가..', new UserResource($user));
     }
 }
