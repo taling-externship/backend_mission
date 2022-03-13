@@ -38,6 +38,6 @@ class AuthSandMailable extends Mailable
             ->to($mail['to_email'], $mail['to_name'])
             ->from($mail['from_email'], $mail['from_name'])
             ->subject($mail['title'])
-            ->view('mail.register', ['mail' => $mail]);
+            ->view('mailable.auth-sand-mail', ['mail' => $mail]);
     }
 }
