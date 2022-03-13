@@ -37,6 +37,10 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OauthAccessToken[] $authAcessToken
+ * @property-read int|null $auth_acess_token_count
  */
 class User extends Authenticatable
 {
@@ -74,7 +78,7 @@ class User extends Authenticatable
 
     public function authAcessToken(): HasMany
     {
-        return $this->hasMany('\AppModels\OauthAccessToken');
+        return $this->hasMany('\App\Models\OauthAccessToken');
     }
 
     public function saveUser($request)

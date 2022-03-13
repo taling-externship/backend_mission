@@ -7,18 +7,29 @@ use App\Http\Requests\Auth\Passport\loginRequest;
 use App\Http\Requests\Auth\Passport\RegisterRequest;
 use App\Http\Resources\Auth\UserResource;
 use App\Http\Traits\ApiResponseTrait;
+use App\Models\AuthMailList;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PassportController extends Controller
 {
     use ApiResponseTrait;
 
     // TODO:: 회원가입
-    public function register(RegisterRequest $registerRequest, User $user)
+    public function register(RegisterRequest $registerRequest, User $user, AuthMailList $authMailList)
     {
         $registerRequest->validated();
-        $user = $user->saveUser($registerRequest);
+        try {
+            DB::beginTransaction();
+            $user = $user->saveUser($registerRequest);
+            $authMailList->addSandList($user->id, $authMailList->getTypeRegister());
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $e;
+            return $this->error('$e->getMessage()', 500);
+        }
         return $this->success('회원가입이 완료 되었습니다.', new UserResource($user), 200);
     }
 
