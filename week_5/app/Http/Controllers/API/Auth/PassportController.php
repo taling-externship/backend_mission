@@ -11,6 +11,7 @@ use App\Models\AuthMailList;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PassportController extends Controller
 {
@@ -50,6 +51,7 @@ class PassportController extends Controller
     {
         $user = User::where('remember_token', $token)->first();
         $user->is_valid = true;
+        $user->remember_token = Str::random('100');
         $user->save();
 
         if ($user) {
