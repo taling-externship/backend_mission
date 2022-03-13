@@ -44,7 +44,7 @@ class AuthSandMailCron extends Command
                 Mail::to($mailList->getUser->email)->send(new AuthSandMailable($data));
                 DB::beginTransaction();
                 AuthMailList::where('id', $mailList->id)->update(['is_send' => true]);
-                User::where('id', $mailList->user_id)->update(['is_valid' => true]);
+                // User::where('id', $mailList->user_id)->update(['is_valid' => true]);
                 DB::commit();
                 \Log::info($mailList);
             } catch (\Throwable $e) {

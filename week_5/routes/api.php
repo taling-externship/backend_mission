@@ -27,7 +27,8 @@ Route::get('articles/{slug_id}/{slug}', [ArticleController::class, 'getArticle']
 // JWT 로그인
 Route::prefix('auth')->group(function () {
     Route::post('register', [PassportController::class, 'register']);
-    Route::post('login', [PassportController::class, 'login'])->name('login');
+    Route::post('login', [PassportController::class, 'login']);
+    Route::get('verify/{token}', [PassportController::class, 'verify']);
 
     // 로그인한 사용자만 볼 수 있음.
     Route::middleware('auth:api')->group(function () {
