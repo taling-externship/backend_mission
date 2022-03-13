@@ -19,3 +19,6 @@ chmod 777 -R storage/*
 /usr/bin/php8.1 artisan cache:clear
 /usr/bin/php8.1 artisan view:clear
 /usr/bin/php8.1 artisan config:clear
+
+/usr/bin/php8.1 artisan horizon -q -n
+/usr/bin/php8.1 artisan queue:work --tries=3 -q -n --no-ansi
