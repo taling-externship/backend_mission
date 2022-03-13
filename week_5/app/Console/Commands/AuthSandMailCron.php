@@ -2,43 +2,52 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\AuthSandMailable;
+use App\Models\AuthMailList;
+use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class AuthSandMailCron extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+    /** The name and signature of the console command. */
     protected $signature = 'authSandMail:cron';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
+    /** The console command description. */
     protected $description = 'Command description';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+    /** Create a new command instance. */
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    /** Execute the console command. */
+    public function handle(): int
     {
-        \Log::info("스케줄링 테스트");
-        // 작성사항 추가
+        // https://dev.jaedong.kim/laravel-email-verification/ 추가 하기엔 늦음
+        $mailLists = AuthMailList::where('is_send', false);
+        foreach ($mailLists as $mailList) {
+            $data = array(
+                'to_email' => $mailList->getUser()->email,
+                'to_name' => $mailList->getUser()->name,
+                'from_email' => env('MAIL_FROM_ADDRESS', 'help@kspark.link'),
+                'from_name' => env('MAIL_FROM_NAME', 'Kyungseo-Park'),
+                'title' => $mailList->type,
+                'content' => $mailList->getUser()->remember_token,
+            );
+
+            try {
+                Mail::send(new AuthSandMailable($data));
+                DB::beginTransaction();
+                AuthMailList::where('id', $mailList->id)->update(['is_send' => true]);
+                User::where('id', $mailList->user_id)->update(['is_valid' => true]);
+                DB::commit();
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                \Log::error($e->getMessage());
+            }
+        }
         return 0;
     }
 }
