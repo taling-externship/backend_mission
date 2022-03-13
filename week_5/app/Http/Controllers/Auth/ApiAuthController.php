@@ -37,4 +37,9 @@ class ApiAuthController extends Controller
     {
         return $this->service->login($request->validated());
     }
+
+    public function reset_password_link()
+    {
+        return $this->service->reset_password_link();
+    }
 }

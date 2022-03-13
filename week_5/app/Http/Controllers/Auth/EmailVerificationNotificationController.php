@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
+use App\Jobs\Auth\Email\VerificationNotificationJob;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -20,7 +21,7 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::ARTICLES);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        VerificationNotificationJob::dispatch($request->user());
 
         return back()->with('status', 'verification-link-sent');
     }

@@ -24,6 +24,7 @@ require __DIR__ . '/auth.php';
 Route::controller('App\\Http\\Controllers\\Auth\\ApiAuthController')->group(function () {
     Route::post('/register', 'store');
     Route::post('/login', 'login');
+    Route::post('/forgot-password', 'reset_password_link');
 });
 
 require __DIR__ . '/attachment.php';
