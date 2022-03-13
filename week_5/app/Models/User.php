@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -41,6 +42,8 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $clients_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OauthAccessToken[] $authAcessToken
  * @property-read int|null $auth_acess_token_count
+ * @property int $is_valid 인증 여부
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsValid($value)
  */
 class User extends Authenticatable
 {
@@ -86,6 +89,7 @@ class User extends Authenticatable
         $this->name = $request->name;
         $this->email = $request->email;
         $this->password = bcrypt($request->password);
+        $this->remember_token = Str::random('100');
         $this->save();
 
         return $this;

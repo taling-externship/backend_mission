@@ -29,6 +29,11 @@ class AuthMailList extends Model
 {
     use HasFactory;
 
+    public function getUser(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
+
     public function getTypeRegister(): string
     {
         return 'register';

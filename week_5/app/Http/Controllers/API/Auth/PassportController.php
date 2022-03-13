@@ -38,7 +38,10 @@ class PassportController extends Controller
     {
         $loginRequest = $loginRequest->validated();
         if (Auth::attempt($loginRequest)) {
-            return $this->success('로그인에 성공 했습니다.', new UserResource(Auth::user()));
+            if(Auth::user()->is_valid) {
+                return $this->success('로그인에 성공 했습니다.', new UserResource(Auth::user()));
+            }
+            return $this->error('이메일 인증을 받아야 합니다..', 403);
         }
         return $this->error('아이디 또는 비밀번호가 일치하지 않습니다', 401);
     }
