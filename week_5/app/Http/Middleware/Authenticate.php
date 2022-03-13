@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Traits\ApiResponseTrait;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
 {
+    use ApiResponseTrait;
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -15,7 +17,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            return $this->error('로그인 해야합니다.', 403);
         }
     }
 }
