@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\Auth\PassportController;
 use App\Http\Controllers\ArticleController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +21,13 @@ Route::post('article', [ArticleController::class, 'addArticle']); // 특정 데�
 Route::put('articles', [ArticleController::class, 'update']); // 데이터 업로드
 Route::delete('articles/{id}', [ArticleController::class, 'delete']); // 데이터 삭제
 Route::get('articles/{slug_id}/{slug}', [ArticleController::class, 'getArticle']); // 특정 데이터 조회
+
+
+// JWT 로그인
+Route::prefix('auth')->group(function () {
+    Route::post('register', [PassportController::class, 'register']);
+    Route::post('login', [PassportController::class, 'login']);
+    Route::middleware('auth:api')->group(function () {
+        Route::get('get-user', [PassportController::class, 'userInfo']);
+    });
+});
