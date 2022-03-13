@@ -31,12 +31,4 @@ class PassportController extends Controller
         }
         return $this->error('아이디 또는 비밀번호가 일치하지 않습니다', 401);
     }
-
-    // TODO:: 정보 조회
-    public function userInfo()
-    {
-
-    }
-
-    // TODO:: 토큰 재발급
 }

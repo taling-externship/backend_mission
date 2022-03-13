@@ -31,6 +31,6 @@ Route::prefix('auth')->group(function () {
 
     // 로그인한 사용자만 볼 수 있음.
     Route::middleware('auth:api')->group(function () {
-        Route::get('get-user', [PassportController::class, 'userInfo']);
+        Route::get('get-user', [LoginUserController::class, 'userInfo']); //->middleware('token-is-valid');
     });
 });
