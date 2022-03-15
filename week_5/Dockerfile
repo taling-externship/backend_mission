@@ -31,6 +31,10 @@ FROM php:8.1.3-apache-buster
 COPY . /var/www/html
 RUN cp /var/www/html/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 RUN cp /var/www/html/.env.production /var/www/html/.env
+
+RUN chown -R www-data:www-data /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage
+
 COPY --from=vendor /app/vendor/ /var/www/html/vendor/
 COPY --from=frontend /app/public/js/ /var/www/html/public/js/
 COPY --from=frontend /app/public/css/ /var/www/html/public/css/
