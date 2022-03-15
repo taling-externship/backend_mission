@@ -34,8 +34,8 @@ RUN cp /var/www/html/.env.production /var/www/html/.env
 
 RUN chown -R www-data:www-data /var/www/html/bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html/storage
-RUN chmod -R 777 /var/ww/html/storage/logs
-RUN chmod -R 777 /var/ww/html/storage/framework
+RUN chmod -R 777 /var/www/html/storage/logs
+RUN chmod -R 777 /var/www/html/storage/framework
 
 COPY --from=vendor /app/vendor/ /var/www/html/vendor/
 COPY --from=frontend /app/public/js/ /var/www/html/public/js/
