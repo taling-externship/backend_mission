@@ -1,32 +1,24 @@
-# For more information: https://laravel.com/docs/sail
 version: '3'
 services:
-    laravel.test:
+    week_5_web:
+        container_name: week_5_web
         build:
-            context: ./vendor/laravel/sail/runtimes/8.1
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            context: .
+#        extra_hosts:
+#            - 'host.docker.internal:host-gateway'
+#        ports:
+#            - '${APP_PORT:-80}:80'
         volumes:
             - '.:/var/www/html'
         networks:
             - sail
         depends_on:
-            - mysql
-    mysql:
+            - week_5_db
+    week_5_db:
+        container_name: week_5_db
         image: 'mysql/mysql-server:8.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+#        ports:
+#            - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: "%"
@@ -44,7 +36,7 @@ services:
             timeout: 5s
 networks:
     sail:
-        driver: bridge
+        external: true
 volumes:
     sail-mysql:
         driver: local
