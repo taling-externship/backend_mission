@@ -29,8 +29,6 @@ class AuthSandMailCron extends Command
         // https://dev.jaedong.kim/laravel-email-verification/ 추가 하기엔 늦음
         $mailLists = AuthMailList::where('is_send', false)->get();
         foreach ($mailLists as $mailList) {
-            \Log::info($mailList->getUser);
-            \Log::info($mailList->getUser->getRememberToken());
             $data = array(
                 'to_email' => $mailList->getUser->email,
                 'to_name' => $mailList->getUser->name,
@@ -42,14 +40,9 @@ class AuthSandMailCron extends Command
 
             try {
                 Mail::to($mailList->getUser->email)->send(new AuthSandMailable($data));
-                DB::beginTransaction();
                 AuthMailList::where('id', $mailList->id)->update(['is_send' => true]);
-                // User::where('id', $mailList->user_id)->update(['is_valid' => true]);
-                DB::commit();
-                \Log::info($mailList);
             } catch (\Throwable $e) {
                 DB::rollBack();
-                \Log::error($e->getMessage());
             }
         }
     }
