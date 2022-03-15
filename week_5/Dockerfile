@@ -19,7 +19,7 @@ FROM node:14.19.0 as frontend
 RUN mkdir -p /app/public
 
 COPY package.json webpack.mix.js package-lock.json /app/
-COPY resources/assets/ /app/resources/assets/
+# COPY resources/assets/ /app/resources/assets/
 
 WORKDIR /app
 
