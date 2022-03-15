@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('AWS_MAIL_MAILER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
